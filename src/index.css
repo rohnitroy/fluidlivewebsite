@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900;
+    font-family: 'Titillium Web', 'Raleway', 'Lato', system-ui, sans-serif;
+    letter-spacing: -0.01em;
+    cursor: none;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium;
+    font-family: 'Titillium Web', sans-serif;
+    letter-spacing: -0.02em;
+    color: #0B0F19;
+  }
+  
+  * {
+    text-decoration: none !important;
+    cursor: none !important;
+  }
+  
+  button, a {
+    box-sizing: border-box !important;
+  }
+}
+
+@layer components {
+  /* Text Gradients with Glow Effect */
+  .gradient-text {
+    background: linear-gradient(to right, #4F8CFF, #2563EB);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 10px rgba(79, 140, 255, 0.2));
+  }
+  
+  .gradient-text-intelligence {
+    background: linear-gradient(to right, #3B82F6, #2563EB);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-text-art {
+    background: linear-gradient(to right, #60A5FA, #3B82F6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Button Styles */
+  .btn-primary {
+    @apply px-8 py-4 text-white font-medium rounded-full transition-all duration-300;
+    font-family: 'Raleway', sans-serif;
+    background-color: #4F8CFF;
+  }
+  
+  .btn-primary:hover {
+    background-color: #3B82F6;
+    box-shadow: 0 10px 40px rgba(79, 140, 255, 0.3);
+  }
+  
+  .btn-secondary {
+    @apply px-8 py-4 bg-transparent font-medium rounded-full transition-all duration-300;
+    font-family: 'Raleway', sans-serif;
+    border: 2px solid #4F8CFF !important;
+    color: #4F8CFF;
+    box-sizing: border-box;
+  }
+  
+  .btn-secondary:hover {
+    background-color: rgba(79, 140, 255, 0.1);
+    color: #3B82F6;
+    border: 2px solid #3B82F6 !important;
+  }
+  
+  /* Card Styles */
+  .card {
+    @apply rounded-2xl backdrop-blur-sm;
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+  
+  .card-hover:hover {
+    background-color: #F9FAFB;
+    box-shadow: 0 10px 30px rgba(79, 140, 255, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  /* Background Grid Pattern */
+  .bg-grid {
+    background-image: 
+      linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  /* Overline Text (Micro-copy) */
+  .overline {
+    @apply text-xs font-medium uppercase;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 0.1em;
+    color: #4F8CFF;
+    text-decoration: none;
+    border: none;
+  }
+  
+  /* Section Spacing */
+  .section-spacing {
+    @apply py-32;
+  }
+  
+  /* Text Colors */
+  .text-slate-muted {
+    color: #64748B;
+  }
+}
+
+@layer utilities {
+  .text-glow-blue {
+    text-shadow: 0 0 20px rgba(79, 140, 255, 0.3);
+  }
+}
+
+* {
+  scroll-behavior: smooth;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+span:not(.btn-secondary), div:not(.btn-secondary), p, h1, h2, h3, h4, h5, h6 {
+  border-bottom: none !important;
+}
