@@ -1,3 +1,5 @@
+import Counter from '../components/Counter';
+
 export default function About() {
   return (
     <div className="pt-4">
@@ -58,6 +60,89 @@ export default function About() {
                   We stay at the forefront of AI advancement to bring you tomorrow's solutions today.
                 </p>
               </div>
+            </div>
+          </div>
+
+          <div className="mb-20">
+            <div className="text-center mb-12">
+              <span className="overline">THE FOUNDING TEAM</span>
+              <h2 className="text-4xl md:text-5xl font-medium mt-6 text-gray-900" style={{letterSpacing: '-0.02em'}}>
+                The people you'll actually work with.
+              </h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Deepesh Sodhi */}
+              <div className="bg-blue-50 rounded-2xl p-8 text-center">
+                <div className="mb-6 flex justify-center">
+                  <img 
+                    src="/Deepesh Sodhi.webp" 
+                    alt="Deepesh Sodhi" 
+                    className="w-32 h-32 rounded-full object-cover"
+                  />
+                </div>
+                <h3 className="text-xl font-medium text-gray-900 mb-1">Deepesh Sodhi</h3>
+                <p className="text-sm font-medium text-blue-600 mb-4">FOUNDER, CEO</p>
+                <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                  Technology consultant and business leader. Seeks to build a strong team and create systems that enable sustainable success.
+                </p>
+                <a href="https://www.linkedin.com/in/dsodhi/" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-sm font-medium hover:text-blue-700">
+                  LINKEDIN →
+                </a>
+              </div>
+
+              {/* Rahul Khandelwal */}
+              <div className="bg-blue-50 rounded-2xl p-8 text-center">
+                <div className="mb-6 flex justify-center">
+                  <img 
+                    src="/Rahul Khandelwal.webp" 
+                    alt="Rahul Khandelwal" 
+                    className="w-32 h-32 rounded-full object-cover"
+                  />
+                </div>
+                <h3 className="text-xl font-medium text-gray-900 mb-1">Rahul Khandelwal</h3>
+                <p className="text-sm font-medium text-blue-600 mb-4">FOUNDER, CFO</p>
+                <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                  Focuses on finances and international growth. Partner at Felix Advisory — Venture Investment, Startup Advisory, M&A.
+                </p>
+                <a href="https://www.linkedin.com/in/rahul-khandelwal-04b8497/" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-sm font-medium hover:text-blue-700">
+                  LINKEDIN →
+                </a>
+              </div>
+
+              {/* Anshuman Sen */}
+              <div className="bg-blue-50 rounded-2xl p-8 text-center">
+                <div className="mb-6 flex justify-center">
+                  <img 
+                    src="/Anshuman Sen.webp" 
+                    alt="Anshuman Sen" 
+                    className="w-32 h-32 rounded-full object-cover"
+                  />
+                </div>
+                <h3 className="text-xl font-medium text-gray-900 mb-1">Anshuman Sen</h3>
+                <p className="text-sm font-medium text-blue-600 mb-4">CHIEF INNOVATION OFFICER</p>
+                <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                  Focuses on Customer Experience and Corporate Communication. Heads DevOps and Cloud-Native Security Practices.
+                </p>
+                <a href="https://www.linkedin.com/in/anshuman-sen/" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-sm font-medium hover:text-blue-700">
+                  LINKEDIN →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            <div className="text-center p-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl border border-blue-200">
+              <Counter end="50" suffix="+" duration={2000} />
+              <p className="text-gray-700 font-medium">AI Projects Delivered</p>
+            </div>
+            <div className="text-center p-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl border border-blue-200">
+              <Counter end="12" suffix="+" duration={2000} />
+              <p className="text-gray-700 font-medium">Industries Served</p>
+            </div>
+            <div className="text-center p-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl border border-blue-200">
+              <Counter end="98" suffix="%" duration={2000} />
+              <p className="text-gray-700 font-medium">Client Retention</p>
             </div>
           </div>
 

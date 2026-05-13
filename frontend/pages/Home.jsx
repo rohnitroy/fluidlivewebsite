@@ -173,7 +173,7 @@ function HeroSection() {
 
 function PrincipleSection() {
   return (
-    <section className="section-spacing bg-gray-50 relative overflow-hidden">
+    <section className="section-spacing relative overflow-hidden" style={{backgroundColor: '#E8F1FF'}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <span className="overline">OUR GUIDING PRINCIPLE</span>
         <h2 className="text-5xl md:text-6xl font-medium mt-6 mb-8" style={{letterSpacing: '-0.02em'}}>
