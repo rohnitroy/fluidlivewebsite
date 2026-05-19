@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Brain, Settings, Palette, TrendingUp, BarChart3, GraduationCap, Wrench, Zap, Sparkles, Waves } from 'lucide-react'
+import { io } from 'socket.io-client'
 
 export default function Home() {
   return (
@@ -426,26 +427,56 @@ function TestimonialsSection() {
 }
 
 function InsightsSection() {
-  const insights = [
-    {
-      category: 'AI STRATEGY',
-      title: 'The AI Audit: Where to Start in 2026',
-      description: 'Most businesses know they need AI. Few know where to begin. Here\'s the framework we use with every new client.',
-      date: '2026-04-01'
-    },
-    {
-      category: 'AI THINKING',
-      title: 'Co-Creation in the Age of Agentic AI',
-      description: 'Agentic AI changes the relationship between humans and technology. Here\'s what it means for how we build together.',
-      date: '2026-03-15'
-    },
-    {
-      category: 'AI INNOVATION',
-      title: 'From Concept to Impact: Building AI Products That Matter',
-      description: 'Learn how we approach AI product development with a focus on real-world impact and user-centric design.',
-      date: '2026-02-28'
+  const [insights, setInsights] = useState([])
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001'
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await fetch(`${backendUrl}/api/blog`)
+        const data = await res.json()
+        if (data.success) {
+          setInsights(data.posts.slice(0, 3))
+        }
+      } catch (err) {
+        // Silently fail
+      }
     }
-  ]
+    fetchPosts()
+
+    const socket = io(backendUrl)
+
+    socket.on('blog:created', (post) => {
+      if (post.published) {
+        setInsights((prev) => [post, ...prev].slice(0, 3))
+      }
+    })
+
+    socket.on('blog:updated', (updatedPost) => {
+      setInsights((prev) => {
+        let updated
+        if (!updatedPost.published) {
+          updated = prev.filter(p => p.id !== updatedPost.id)
+        } else {
+          const exists = prev.find(p => p.id === updatedPost.id)
+          if (exists) {
+            updated = prev.map(p => p.id === updatedPost.id ? updatedPost : p)
+          } else {
+            updated = [updatedPost, ...prev]
+          }
+        }
+        return updated.slice(0, 3)
+      })
+    })
+
+    socket.on('blog:deleted', (postId) => {
+      setInsights((prev) => prev.filter(p => p.id !== postId))
+    })
+
+    return () => socket.disconnect()
+  }, [])
+
+  if (insights.length === 0) return null
 
   return (
     <section className="section-spacing bg-gray-50">
@@ -460,16 +491,16 @@ function InsightsSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {insights.map((insight, index) => (
             <Link 
-              key={index}
-              to="/insights"
+              key={insight.id}
+              to={`/insights/${insight.slug}`}
               className={`group p-10 card card-hover ${index % 2 === 0 ? 'bg-blue-50' : 'bg-white'}`}
             >
               <span className="overline" style={{color: '#4F8CFF'}}>{insight.category}</span>
               <h3 className="text-3xl font-medium mt-4 mb-4 transition-colors duration-300 text-gray-900" style={{letterSpacing: '-0.02em'}}>
                 {insight.title}
               </h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">{insight.description}</p>
-              <p className="text-sm text-gray-500">{insight.date} · Fluid.Live Team</p>
+              <p className="text-gray-600 mb-6 leading-relaxed">{insight.excerpt}</p>
+              <p className="text-sm text-gray-500">{new Date(insight.createdAt).toLocaleDateString()} · {insight.author}</p>
             </Link>
           ))}
         </div>

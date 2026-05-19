@@ -1,4 +1,6 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
+
+const COOLDOWN_SECONDS = 60
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -9,55 +11,27 @@ export default function Contact() {
   })
   const [status, setStatus] = useState({ type: '', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const recaptchaRef = useRef(null)
-  const [captchaToken, setCaptchaToken] = useState('')
+  const [cooldown, setCooldown] = useState(0)
+  const cooldownRef = useRef(null)
 
-  useEffect(() => {
-    // Define the reCAPTCHA callback globally
-    window.onRecaptchaChange = (token) => {
-      setCaptchaToken(token)
-    }
-    window.onRecaptchaExpired = () => {
-      setCaptchaToken('')
-    }
-    return () => {
-      delete window.onRecaptchaChange
-      delete window.onRecaptchaExpired
-    }
-  }, [])
-
-  useEffect(() => {
-    // Render reCAPTCHA when the component mounts and the script is loaded
-    const renderCaptcha = () => {
-      if (window.grecaptcha && recaptchaRef.current && !recaptchaRef.current.hasChildNodes()) {
-        window.grecaptcha.render(recaptchaRef.current, {
-          sitekey: import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6Lc7i_EsAAAAAD-3sQJsTL-CEdXzVDy9vA5k_bKB',
-          callback: 'onRecaptchaChange',
-          'expired-callback': 'onRecaptchaExpired'
-        })
-      }
-    }
-
-    // If grecaptcha is already loaded, render immediately
-    if (window.grecaptcha && window.grecaptcha.render) {
-      renderCaptcha()
-    } else {
-      // Otherwise wait for it to load
-      const interval = setInterval(() => {
-        if (window.grecaptcha && window.grecaptcha.render) {
-          renderCaptcha()
-          clearInterval(interval)
+  const startCooldown = () => {
+    setCooldown(COOLDOWN_SECONDS)
+    cooldownRef.current = setInterval(() => {
+      setCooldown((prev) => {
+        if (prev <= 1) {
+          clearInterval(cooldownRef.current)
+          return 0
         }
-      }, 100)
-      return () => clearInterval(interval)
-    }
-  }, [])
+        return prev - 1
+      })
+    }, 1000)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!captchaToken) {
-      setStatus({ type: 'error', message: 'Please complete the CAPTCHA verification.' })
+    if (cooldown > 0) {
+      setStatus({ type: 'error', message: `Please wait ${cooldown} seconds before sending another message.` })
       return
     }
 
@@ -65,11 +39,11 @@ export default function Contact() {
     setStatus({ type: '', message: '' })
 
     try {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001'
       const response = await fetch(`${backendUrl}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, captchaToken })
+        body: JSON.stringify(formData)
       })
 
       const data = await response.json()
@@ -77,8 +51,7 @@ export default function Contact() {
       if (response.ok) {
         setStatus({ type: 'success', message: data.message || 'Message sent successfully!' })
         setFormData({ name: '', email: '', company: '', message: '' })
-        setCaptchaToken('')
-        if (window.grecaptcha) window.grecaptcha.reset()
+        startCooldown()
       } else {
         setStatus({ type: 'error', message: data.error || 'Something went wrong. Please try again.' })
       }
@@ -179,14 +152,12 @@ export default function Contact() {
                   />
                 </div>
 
-                <div ref={recaptchaRef} className="mb-2"></div>
-
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || cooldown > 0}
                   className="w-full btn-primary text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {cooldown > 0 ? `Please wait ${cooldown}s` : isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
 
                 {status.message && (

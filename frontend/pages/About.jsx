@@ -133,15 +133,15 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-            <div className="text-center p-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl border border-blue-200">
+            <div className="text-center p-8">
               <Counter end="50" suffix="+" duration={2000} />
               <p className="text-gray-700 font-medium">AI Projects Delivered</p>
             </div>
-            <div className="text-center p-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl border border-blue-200">
+            <div className="text-center p-8">
               <Counter end="25" suffix="+" duration={2000} />
               <p className="text-gray-700 font-medium">Industries Served</p>
             </div>
-            <div className="text-center p-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl border border-blue-200">
+            <div className="text-center p-8">
               <Counter end="98" suffix="%" duration={2000} />
               <p className="text-gray-700 font-medium">Client Retention</p>
             </div>

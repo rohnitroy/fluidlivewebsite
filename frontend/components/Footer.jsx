@@ -92,6 +92,11 @@ export default function Footer() {
                   Careers
                 </Link>
               </li>
+              <li>
+                <Link to="/privacy-policy" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm sm:text-base">
+                  Privacy Policy
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -120,8 +125,11 @@ export default function Footer() {
         </div>
 
         {/* Copyright Section */}
-        <div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-800 text-center text-gray-400 text-xs sm:text-sm">
+        <div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-400 text-xs sm:text-sm">
           <p>© 2026 FluidLive Solutions Private Limited. All rights reserved.</p>
+          <Link to="/privacy-policy" className="hover:text-white transition-colors duration-300">
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>

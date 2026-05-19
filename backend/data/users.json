@@ -1,0 +1,9 @@
+[
+  {
+    "id": "1",
+    "email": "sodhi@fluid.live",
+    "password": "$2a$10$y/BXc3CCVsH.Vy.jQOEpiOOKX4WT2KGrOHMQYz4cz3kAdwnWOk.gq",
+    "name": "Admin",
+    "role": "admin"
+  }
+]
