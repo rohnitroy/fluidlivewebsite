@@ -92,11 +92,6 @@ export default function Footer() {
                   Careers
                 </Link>
               </li>
-              <li>
-                <Link to="/privacy-policy" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm sm:text-base">
-                  Privacy Policy
-                </Link>
-              </li>
             </ul>
           </div>
 

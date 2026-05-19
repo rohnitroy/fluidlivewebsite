@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Target, Handshake, Lightbulb } from 'lucide-react';
 import Counter from '../components/Counter';
 import SEO from '../components/SEO';
 
@@ -8,7 +9,7 @@ export default function About() {
       <SEO
         title="About Us"
         path="/about"
-        description="Learn about FluidLive Solutions Pvt Ltd — an AI-first company with 50+ projects delivered across 25+ industries and 98% client retention."
+        description="Learn about FluidLive Solutions Pvt Ltd — an AI-first company with 150+ projects delivered across 25+ clients and 98% client retention."
         keywords="about FluidLive, AI company, team, Pune AI agency, digital transformation company"
       />
       <section className="section-spacing bg-white">
@@ -48,21 +49,27 @@ export default function About() {
             <h2 className="text-4xl font-medium text-center mb-12 text-gray-900" style={{letterSpacing: '-0.02em'}}>Our Values</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center p-8">
-                <div className="text-5xl mb-4">🎯</div>
+                <div className="flex justify-center mb-4">
+                  <Target className="w-12 h-12 text-blue-600" />
+                </div>
                 <h3 className="text-xl font-medium mb-3 text-gray-900">Impact-Driven</h3>
                 <p className="text-gray-600 leading-relaxed">
                   We measure success by the real-world results we deliver, not just the technology we deploy.
                 </p>
               </div>
               <div className="text-center p-8">
-                <div className="text-5xl mb-4">🤝</div>
+                <div className="flex justify-center mb-4">
+                  <Handshake className="w-12 h-12 text-blue-600" />
+                </div>
                 <h3 className="text-xl font-medium mb-3 text-gray-900">Partnership First</h3>
                 <p className="text-gray-600 leading-relaxed">
                   Your success is our success. We're in it for the long haul, not just the project.
                 </p>
               </div>
               <div className="text-center p-8">
-                <div className="text-5xl mb-4">💡</div>
+                <div className="flex justify-center mb-4">
+                  <Lightbulb className="w-12 h-12 text-blue-600" />
+                </div>
                 <h3 className="text-xl font-medium mb-3 text-gray-900">Innovation Always</h3>
                 <p className="text-gray-600 leading-relaxed">
                   We stay at the forefront of AI advancement to bring you tomorrow's solutions today.
@@ -139,14 +146,18 @@ export default function About() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
             <div className="text-center p-8">
-              <Counter end="50" suffix="+" duration={2000} />
-              <p className="text-gray-700 font-medium">AI Projects Delivered</p>
+              <Counter end="10" suffix="+" duration={2000} />
+              <p className="text-gray-700 font-medium">Years</p>
+            </div>
+            <div className="text-center p-8">
+              <Counter end="150" suffix="+" duration={2000} />
+              <p className="text-gray-700 font-medium">Projects Delivered</p>
             </div>
             <div className="text-center p-8">
               <Counter end="25" suffix="+" duration={2000} />
-              <p className="text-gray-700 font-medium">Industries Served</p>
+              <p className="text-gray-700 font-medium">Clients Served</p>
             </div>
             <div className="text-center p-8">
               <Counter end="98" suffix="%" duration={2000} />

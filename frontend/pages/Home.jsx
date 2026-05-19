@@ -146,7 +146,7 @@ function HeroSection() {
         </motion.h1>
         
         <motion.p 
-          className="text-xl md:text-2xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed"
+          className="text-xl md:text-2xl text-gray-600 mb-16 max-w-4xl mx-auto leading-relaxed md:whitespace-nowrap"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -270,7 +270,7 @@ function ServicesSection() {
           
           {/* CTA Container */}
           <div className="group p-8 card flex flex-col items-start justify-start text-left min-h-[300px] bg-gray-900">
-            <Zap className="w-12 h-12 mb-6 text-blue-400" strokeWidth={1.5} />
+            <Zap className="w-12 h-12 mb-6 text-yellow-400" strokeWidth={1.5} />
             <h3 className="text-xl font-medium mb-4 text-white">
               Ready to Transform?
             </h3>
@@ -324,7 +324,7 @@ function ProcessSection() {
 }
 
 function StatsSection() {
-  const [counts, setCounts] = useState({ projects: 0, industries: 0, retention: 0 })
+  const [counts, setCounts] = useState({ projects: 0, industries: 0, retention: 0, years: 0 })
   const [hasStarted, setHasStarted] = useState(false)
   const sectionRef = useRef(null)
 
@@ -372,6 +372,7 @@ function StatsSection() {
     const projectTarget = 150
     const industriesTarget = 25
     const retentionTarget = 98
+    const yearsTarget = 10
 
     let currentStep = 0
     const interval = setInterval(() => {
@@ -381,7 +382,8 @@ function StatsSection() {
       setCounts({
         projects: Math.floor(projectTarget * progress),
         industries: Math.floor(industriesTarget * progress),
-        retention: Math.floor(retentionTarget * progress)
+        retention: Math.floor(retentionTarget * progress),
+        years: Math.floor(yearsTarget * progress)
       })
 
       if (currentStep >= steps) clearInterval(interval)
@@ -398,14 +400,18 @@ function StatsSection() {
         </div>
         
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-center mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-16 text-center mb-20">
+          <div>
+            <div className="text-7xl font-medium gradient-text mb-4">{counts.years}+</div>
+            <div className="text-lg text-gray-600" style={{letterSpacing: '0.05em'}}>YEARS</div>
+          </div>
           <div>
             <div className="text-7xl font-medium gradient-text mb-4">{counts.projects}+</div>
-            <div className="text-lg text-gray-600" style={{letterSpacing: '0.05em'}}>AI PROJECTS DELIVERED</div>
+            <div className="text-lg text-gray-600" style={{letterSpacing: '0.05em'}}>PROJECTS DELIVERED</div>
           </div>
           <div>
             <div className="text-7xl font-medium gradient-text mb-4">{counts.industries}+</div>
-            <div className="text-lg text-gray-600" style={{letterSpacing: '0.05em'}}>INDUSTRIES SERVED</div>
+            <div className="text-lg text-gray-600" style={{letterSpacing: '0.05em'}}>CLIENTS SERVED</div>
           </div>
           <div>
             <div className="text-7xl font-medium gradient-text mb-4">{counts.retention}%</div>
