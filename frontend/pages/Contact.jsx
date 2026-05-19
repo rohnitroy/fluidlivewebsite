@@ -31,7 +31,7 @@ export default function Contact() {
     const renderCaptcha = () => {
       if (window.grecaptcha && recaptchaRef.current && !recaptchaRef.current.hasChildNodes()) {
         window.grecaptcha.render(recaptchaRef.current, {
-          sitekey: import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+          sitekey: import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6Lc7i_EsAAAAAD-3sQJsTL-CEdXzVDy9vA5k_bKB',
           callback: 'onRecaptchaChange',
           'expired-callback': 'onRecaptchaExpired'
         })
