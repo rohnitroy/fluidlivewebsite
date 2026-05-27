@@ -9,6 +9,7 @@ import About from './pages/About'
 import Insights from './pages/Insights'
 import Contact from './pages/Contact'
 import Careers from './pages/Careers'
+import JobDetail from './pages/JobDetail'
 import AdminLogin from './pages/AdminLogin'
 import AdminDashboard from './pages/AdminDashboard'
 import AdminBlog from './pages/AdminBlog'
@@ -30,6 +31,7 @@ function App() {
             <Route path="/insights/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/careers/:slug" element={<JobDetail />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             
             {/* Admin Routes */}

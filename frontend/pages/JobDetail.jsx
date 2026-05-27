@@ -1,0 +1,499 @@
+import { useState, useEffect, useRef } from 'react'
+import { useParams, useLocation, Link } from 'react-router-dom'
+import {
+  MapPin, Briefcase, Clock, DollarSign, ChevronLeft,
+  Upload, CheckCircle, AlertCircle, Loader2, X, User,
+  Phone, Mail, Building2, Calendar, Banknote, MapPinned
+} from 'lucide-react'
+import SEO from '../components/SEO'
+import {
+  fetchPublishedJobs, findJobBySlug, titleToSlug,
+  formatSalary, formatExperience, formatPostedDate,
+  submitApplication, FLUIDJOBS_API
+} from '../utils/jobUtils'
+
+/* ═══════════════════════════════════════════════════════════════
+   JOB DETAIL PAGE
+═══════════════════════════════════════════════════════════════ */
+export default function JobDetail() {
+  const { slug } = useParams()
+  const location = useLocation()
+  const [job, setJob] = useState(location.state?.job || null)
+  const [loading, setLoading] = useState(!job)
+  const [showForm, setShowForm] = useState(false)
+  const formRef = useRef(null)
+
+  useEffect(() => {
+    if (job) return
+    fetchPublishedJobs()
+      .then(jobs => setJob(findJobBySlug(jobs, slug)))
+      .catch(() => setJob(null))
+      .finally(() => setLoading(false))
+  }, [slug])
+
+  const scrollToForm = () => {
+    setShowForm(true)
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
+      </div>
+    )
+  }
+
+  if (!job) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-4 text-center">
+        <div className="text-6xl mb-2">🌊</div>
+        <h1 className="text-3xl font-medium text-gray-900">Job Not Found</h1>
+        <p className="text-gray-500 max-w-md">This opening may no longer be available or the link might be outdated.</p>
+        <Link to="/careers" className="btn-primary mt-4 text-base">← View All Openings</Link>
+      </div>
+    )
+  }
+
+  const salary    = formatSalary(job.minSalary || job.min_salary, job.maxSalary || job.max_salary, job.showSalaryToCandidate ?? job.show_salary_to_candidate)
+  const exp       = formatExperience(job.minExperience || job.min_experience, job.maxExperience || job.max_experience)
+  const posted    = formatPostedDate(job.postedDate || job.created_at)
+  const location_ = typeof job.location === 'string' ? job.location : (Array.isArray(job.locations) ? job.locations.join(', ') : '')
+  const mode      = job.modeOfJob || job.mode_of_job
+  const type      = job.jobType || job.job_type
+  const company   = job.company || 'FluidLive Solutions'
+  const coverImg  = job.selectedImage || job.selected_image
+  const skills    = Array.isArray(job.skills) ? job.skills : []
+  const desc      = (job.description || job.job_description || '').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'")
+
+  return (
+    <div className="pt-4 min-h-screen bg-white">
+      <SEO
+        title={job.title}
+        path={`/careers/${slug}`}
+        description={`${job.title} at ${company} — ${location_}. ${type ? type + ' · ' : ''}${exp ? exp + ' experience required.' : ''}`}
+        keywords={`${job.title}, ${company}, ${location_}, jobs, careers, fluid live`}
+      />
+
+      {/* Cover image banner */}
+      {coverImg && (
+        <div className="w-full h-56 md:h-72 overflow-hidden">
+          <img src={coverImg} alt={job.title} className="w-full h-full object-cover" onError={e => { e.target.parentElement.style.display = 'none' }} />
+        </div>
+      )}
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        {/* Breadcrumb */}
+        <Link to="/careers" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors mb-8 group">
+          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+          Back to Openings
+        </Link>
+
+        {/* Header */}
+        <div className="mb-10">
+          {type && (
+            <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-100 mb-4">
+              {type}
+            </span>
+          )}
+          <h1 className="text-4xl md:text-5xl font-medium text-gray-900 mb-3" style={{ letterSpacing: '-0.02em' }}>
+            {job.title}
+          </h1>
+          <p className="text-lg text-gray-500">{company}</p>
+        </div>
+
+        {/* Info bar */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 p-6 bg-gray-50 rounded-2xl border border-gray-100">
+          {location_ && (
+            <InfoCell icon={<MapPin className="w-4 h-4 text-blue-500" />} label="Location" value={location_} />
+          )}
+          {mode && (
+            <InfoCell icon={<Briefcase className="w-4 h-4 text-blue-500" />} label="Work Mode" value={mode} />
+          )}
+          {exp && (
+            <InfoCell icon={<Clock className="w-4 h-4 text-blue-500" />} label="Experience" value={exp} />
+          )}
+          {salary && (
+            <InfoCell icon={<DollarSign className="w-4 h-4 text-blue-500" />} label="Salary" value={salary} />
+          )}
+          {posted && (
+            <InfoCell icon={<Calendar className="w-4 h-4 text-blue-500" />} label="Posted" value={posted} />
+          )}
+          {job.noOfOpenings && (
+            <InfoCell icon={<User className="w-4 h-4 text-blue-500" />} label="Openings" value={job.noOfOpenings} />
+          )}
+        </div>
+
+        {/* Apply button (top) */}
+        {!showForm && (
+          <button onClick={scrollToForm} className="btn-primary w-full md:w-auto text-lg mb-12">
+            Apply for This Role →
+          </button>
+        )}
+
+        {/* Description */}
+        {desc && (
+          <div className="mb-10">
+            <h2 className="text-2xl font-medium text-gray-900 mb-5" style={{ letterSpacing: '-0.02em' }}>About the Role</h2>
+            <div
+              className="prose prose-gray max-w-none text-gray-700 leading-relaxed job-description-html"
+              dangerouslySetInnerHTML={{ __html: desc }}
+            />
+          </div>
+        )}
+
+        {/* Skills */}
+        {skills.length > 0 && (
+          <div className="mb-12">
+            <h2 className="text-2xl font-medium text-gray-900 mb-5" style={{ letterSpacing: '-0.02em' }}>Required Skills</h2>
+            <div className="flex flex-wrap gap-3">
+              {skills.map((s, i) => (
+                <span key={i} className="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-100">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Apply button (bottom, before form) */}
+        {!showForm && (
+          <div className="border-t border-gray-100 pt-10 mb-4">
+            <button onClick={scrollToForm} className="btn-primary w-full text-lg">
+              Apply Now — It Takes 2 Minutes
+            </button>
+          </div>
+        )}
+
+        {/* Application Form */}
+        <div ref={formRef}>
+          {showForm && (
+            <div className="border-t border-gray-100 pt-12">
+              <div className="mb-8">
+                <span className="overline">APPLY NOW</span>
+                <h2 className="text-3xl font-medium text-gray-900 mt-3" style={{ letterSpacing: '-0.02em' }}>
+                  Application Form
+                </h2>
+                <p className="text-gray-500 mt-2">
+                  Applying for <strong>{job.title}</strong> at {company}
+                </p>
+              </div>
+              <ApplicationForm job={job} onClose={() => setShowForm(false)} />
+            </div>
+          )}
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
+/* ─── Info cell helper ────── */
+function InfoCell({ icon, label, value }) {
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="flex items-center gap-1.5 text-xs text-gray-400 uppercase tracking-wider font-medium">
+        {icon}
+        {label}
+      </div>
+      <div className="text-sm font-semibold text-gray-800">{value}</div>
+    </div>
+  )
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   APPLICATION FORM
+═══════════════════════════════════════════════════════════════ */
+const NOTICE_OPTIONS = ['Immediate', '15 Days', '1 Month', '2 Months', '3 Months', '6 Months', 'Other']
+const WORK_MODE_OPTIONS = ['On-site', 'Remote', 'Hybrid']
+
+function ApplicationForm({ job, onClose }) {
+  const [form, setForm] = useState({
+    fullName: '', email: '', phone: '',
+    gender: '', maritalStatus: '', linkedinUrl: '',
+    experience: '', currentlyWorking: '',
+    currentCompany: '', noticePeriod: '',
+    currentCTC: '', lastCompany: '', lastCTC: '',
+    expectedCTC: '', currentCity: '', workMode: '', jobProfile: ''
+  })
+  const [cvFile, setCvFile] = useState(null)
+  const [cvError, setCvError] = useState('')
+  const [errors, setErrors] = useState({})
+  const [status, setStatus] = useState('idle') // idle | submitting | success | error
+  const [serverError, setServerError] = useState('')
+
+  const set = (field, val) => {
+    setForm(prev => ({ ...prev, [field]: val }))
+    if (errors[field]) setErrors(prev => ({ ...prev, [field]: '' }))
+  }
+
+  const handleFile = (e) => {
+    const file = e.target.files[0]
+    setCvError('')
+    if (!file) return
+    const allowed = /\.(pdf|doc|docx)$/i.test(file.name)
+    if (!allowed) { setCvError('Only PDF, DOC, DOCX files allowed'); return }
+    if (file.size > 10 * 1024 * 1024) { setCvError(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Max 10MB.`); return }
+    setCvFile(file)
+  }
+
+  const validate = () => {
+    const e = {}
+    if (!form.fullName.trim()) e.fullName = 'Full name is required'
+    if (!form.email.trim()) e.email = 'Email is required'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email)) e.email = 'Enter a valid email address'
+    if (!form.phone.trim()) e.phone = 'Phone number is required'
+    else { const d = form.phone.replace(/\D/g,''); if (d.length !== 10) e.phone = 'Phone must be exactly 10 digits'; else if (/^(\d)\1{9}$/.test(d) || d === '1234567890') e.phone = 'Enter a valid phone number' }
+    if (!form.experience) e.experience = 'Experience is required'
+    if (!form.currentlyWorking) e.currentlyWorking = 'Please select employment status'
+    if (form.currentlyWorking === 'yes' && !form.currentCompany.trim()) e.currentCompany = 'Current company is required'
+    if (!form.expectedCTC.trim()) e.expectedCTC = 'Expected CTC is required'
+    if (!form.currentCity.trim()) e.currentCity = 'City is required'
+    if (!form.workMode) e.workMode = 'Work mode preference is required'
+    if (!cvFile) e.cv = 'Please upload your CV / Resume'
+    return e
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const errs = validate()
+    if (Object.keys(errs).length) { setErrors(errs); return }
+
+    setStatus('submitting')
+    setServerError('')
+
+    try {
+      const fd = new FormData()
+      fd.append('jobId', job.id)
+      Object.entries(form).forEach(([k, v]) => v && fd.append(k, v))
+      if (cvFile) fd.append('cv', cvFile)
+
+      const result = await submitApplication(fd)
+
+      if (result.success) {
+        setStatus('success')
+      } else {
+        setStatus('error')
+        setServerError(result.message || 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setStatus('error')
+      setServerError('Network error. Please check your connection and try again.')
+    }
+  }
+
+  if (status === 'success') {
+    return (
+      <div className="text-center py-16 px-6">
+        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <CheckCircle className="w-10 h-10 text-green-600" />
+        </div>
+        <h3 className="text-2xl font-medium text-gray-900 mb-3">Application Submitted!</h3>
+        <p className="text-gray-600 max-w-md mx-auto mb-2">
+          Thanks for applying for <strong>{job.title}</strong>. We've received your application and sent you a confirmation email.
+        </p>
+        <p className="text-gray-500 text-sm mb-10">Our team will review your profile and reach out if there's a match.</p>
+        <Link to="/careers" className="btn-primary">
+          View More Openings
+        </Link>
+      </div>
+    )
+  }
+
+  return (
+    <form onSubmit={handleSubmit} noValidate className="space-y-8">
+
+      {/* Personal Info */}
+      <FormSection title="Personal Information">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <Field label="Full Name *" error={errors.fullName}>
+            <Input icon={<User className="w-4 h-4" />} placeholder="Your full name" value={form.fullName} onChange={v => set('fullName', v)} />
+          </Field>
+          <Field label="Email Address *" error={errors.email}>
+            <Input icon={<Mail className="w-4 h-4" />} type="email" placeholder="you@example.com" value={form.email} onChange={v => set('email', v)} />
+          </Field>
+          <Field label="Phone Number *" error={errors.phone}>
+            <Input icon={<Phone className="w-4 h-4" />} type="tel" placeholder="10-digit mobile number" value={form.phone} onChange={v => set('phone', v)} maxLength={10} />
+          </Field>
+          <Field label="LinkedIn URL">
+            <Input placeholder="https://linkedin.com/in/yourprofile" value={form.linkedinUrl} onChange={v => set('linkedinUrl', v)} />
+          </Field>
+          <Field label="Gender">
+            <Select value={form.gender} onChange={v => set('gender', v)} options={['Male', 'Female', 'Non-binary', 'Prefer not to say']} placeholder="Select gender" />
+          </Field>
+          <Field label="Marital Status">
+            <Select value={form.maritalStatus} onChange={v => set('maritalStatus', v)} options={['Single', 'Married', 'Divorced', 'Widowed']} placeholder="Select status" />
+          </Field>
+        </div>
+      </FormSection>
+
+      {/* Professional */}
+      <FormSection title="Professional Background">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <Field label="Total Experience (Years) *" error={errors.experience}>
+            <Input type="number" placeholder="e.g. 3.5" min="0" max="50" step="0.5" value={form.experience} onChange={v => set('experience', v)} />
+          </Field>
+          <Field label="Current Employment Status *" error={errors.currentlyWorking}>
+            <Select value={form.currentlyWorking} onChange={v => set('currentlyWorking', v)} options={[{v:'yes', l:'Currently Employed'},{v:'no', l:'Not Currently Employed'}]} placeholder="Select status" />
+          </Field>
+
+          {form.currentlyWorking === 'yes' && <>
+            <Field label="Current Company *" error={errors.currentCompany}>
+              <Input icon={<Building2 className="w-4 h-4" />} placeholder="Company name" value={form.currentCompany} onChange={v => set('currentCompany', v)} />
+            </Field>
+            <Field label="Notice Period">
+              <Select value={form.noticePeriod} onChange={v => set('noticePeriod', v)} options={NOTICE_OPTIONS} placeholder="Select notice period" />
+            </Field>
+            <Field label="Current CTC (Annual)">
+              <Input icon={<Banknote className="w-4 h-4" />} placeholder="e.g. 6,00,000" value={form.currentCTC} onChange={v => set('currentCTC', v)} />
+            </Field>
+          </>}
+
+          {form.currentlyWorking === 'no' && <>
+            <Field label="Last Company">
+              <Input icon={<Building2 className="w-4 h-4" />} placeholder="Previous company name" value={form.lastCompany} onChange={v => set('lastCompany', v)} />
+            </Field>
+            <Field label="Last CTC (Annual)">
+              <Input icon={<Banknote className="w-4 h-4" />} placeholder="e.g. 5,00,000" value={form.lastCTC} onChange={v => set('lastCTC', v)} />
+            </Field>
+          </>}
+
+          <Field label="Expected CTC (Annual) *" error={errors.expectedCTC}>
+            <Input icon={<Banknote className="w-4 h-4" />} placeholder="e.g. 8,00,000" value={form.expectedCTC} onChange={v => set('expectedCTC', v)} />
+          </Field>
+          <Field label="Current City *" error={errors.currentCity}>
+            <Input icon={<MapPinned className="w-4 h-4" />} placeholder="City you are based in" value={form.currentCity} onChange={v => set('currentCity', v)} />
+          </Field>
+          <Field label="Work Mode Preference *" error={errors.workMode}>
+            <Select value={form.workMode} onChange={v => set('workMode', v)} options={WORK_MODE_OPTIONS} placeholder="Select preference" />
+          </Field>
+          <Field label="Job Profile / Role You're Targeting">
+            <Input placeholder="e.g. Frontend Engineer, Product Manager" value={form.jobProfile} onChange={v => set('jobProfile', v)} />
+          </Field>
+        </div>
+      </FormSection>
+
+      {/* CV Upload */}
+      <FormSection title="Resume / CV *">
+        <Field error={errors.cv || cvError}>
+          <div
+            className={`relative border-2 border-dashed rounded-2xl p-8 text-center transition-colors duration-200 cursor-pointer
+              ${cvFile ? 'border-green-400 bg-green-50' : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50'}`}
+            onClick={() => document.getElementById('cv-upload').click()}
+            onDragOver={e => e.preventDefault()}
+            onDrop={e => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) { const fe = { target: { files: [f] } }; handleFile(fe) } }}
+          >
+            {cvFile ? (
+              <div className="flex items-center justify-center gap-3">
+                <CheckCircle className="w-6 h-6 text-green-600" />
+                <div className="text-left">
+                  <p className="font-medium text-green-800">{cvFile.name}</p>
+                  <p className="text-sm text-green-600">{(cvFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={e => { e.stopPropagation(); setCvFile(null); setCvError('') }}
+                  className="ml-auto p-1 rounded-full hover:bg-green-100 text-green-600"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            ) : (
+              <>
+                <Upload className="w-10 h-10 text-gray-400 mx-auto mb-3" />
+                <p className="text-gray-700 font-medium mb-1">Click to upload or drag & drop</p>
+                <p className="text-sm text-gray-400">PDF, DOC, DOCX · Max 10MB</p>
+              </>
+            )}
+            <input id="cv-upload" type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={handleFile} />
+          </div>
+        </Field>
+      </FormSection>
+
+      {/* Server error */}
+      {status === 'error' && serverError && (
+        <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+          <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+          <span>{serverError}</span>
+        </div>
+      )}
+
+      {/* Actions */}
+      <div className="flex flex-col sm:flex-row gap-4 pt-4">
+        <button
+          type="submit"
+          disabled={status === 'submitting'}
+          className="btn-primary flex items-center justify-center gap-2 flex-1 text-base disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {status === 'submitting' ? (
+            <><Loader2 className="w-5 h-5 animate-spin" />Submitting…</>
+          ) : 'Submit Application →'}
+        </button>
+        <button
+          type="button"
+          onClick={onClose}
+          className="btn-secondary flex-shrink-0 text-base"
+        >
+          Cancel
+        </button>
+      </div>
+
+    </form>
+  )
+}
+
+/* ─── Tiny form helper components ────── */
+function FormSection({ title, children }) {
+  return (
+    <div className="rounded-2xl border border-gray-100 bg-gray-50 p-6 space-y-5">
+      <h3 className="text-sm font-semibold text-blue-600 uppercase tracking-wider">{title}</h3>
+      {children}
+    </div>
+  )
+}
+
+function Field({ label, error, children }) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      {label && <label className="text-sm font-medium text-gray-700">{label}</label>}
+      {children}
+      {error && <p className="text-xs text-red-600 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{error}</p>}
+    </div>
+  )
+}
+
+function Input({ icon, type = 'text', placeholder, value, onChange, ...rest }) {
+  return (
+    <div className={`flex items-center gap-2 px-4 py-3 bg-white border border-gray-200 rounded-xl focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-50 transition-all duration-200 ${icon ? '' : ''}`}>
+      {icon && <span className="text-gray-400 flex-shrink-0">{icon}</span>}
+      <input
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        className="flex-1 bg-transparent outline-none text-sm text-gray-900 placeholder-gray-400 min-w-0"
+        {...rest}
+      />
+    </div>
+  )
+}
+
+function Select({ value, onChange, options, placeholder }) {
+  return (
+    <select
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-900 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-50 transition-all duration-200 appearance-none cursor-pointer"
+    >
+      <option value="">{placeholder}</option>
+      {options.map(o => typeof o === 'string'
+        ? <option key={o} value={o}>{o}</option>
+        : <option key={o.v} value={o.v}>{o.l}</option>
+      )}
+    </select>
+  )
+}
