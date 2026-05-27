@@ -4,7 +4,7 @@ import {
   MapPin, Briefcase, Clock, DollarSign, ChevronLeft,
   Upload, CheckCircle, AlertCircle, Loader2, X, User,
   Phone, Mail, Building2, Calendar, Banknote, MapPinned,
-  ChevronDown, ArrowRight, ArrowLeft
+  ChevronDown, ArrowRight, ArrowLeft, IndianRupee
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SEO from '../components/SEO'
@@ -364,15 +364,15 @@ function ApplicationForm({ job, onClose }) {
   return (
     <div className="w-full">
       {/* Progress indicators */}
-      <div className="flex items-center justify-between mb-8 relative px-2">
-        <div className="absolute left-6 right-6 top-1/2 -translate-y-1/2 h-1 bg-gray-200 rounded-full z-0">
+      <div className="flex items-start justify-between mb-8 relative">
+        <div className="absolute left-[16.66%] right-[16.66%] top-5 -translate-y-1/2 h-1 bg-gray-200 rounded-full z-0">
            <div 
              className="h-full bg-blue-600 rounded-full transition-all duration-500 ease-out" 
              style={{ width: `${calculateProgress()}%` }} 
            />
         </div>
         {steps.map((s, i) => (
-          <div key={s.id} className="flex flex-col items-center gap-2 relative z-10">
+          <div key={s.id} className="flex flex-col items-center gap-2 relative z-10 flex-1">
             <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-colors duration-300 ${step > i || calculateProgress() >= ((i) / (steps.length - 1)) * 100 ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-gray-400 border-2 border-gray-200'}`}>
               {step > i ? <CheckCircle className="w-5 h-5" /> : i + 1}
             </div>
@@ -701,7 +701,7 @@ function CTCField({ label, error, value, onChange }) {
         full value CTC per year in ₹ Rupees e.g. 3,50,000 | Do not write 3.5
       </span>
       <div className={`flex items-center gap-2 px-4 py-3 bg-white border ${error ? 'border-red-300' : 'border-gray-200'} rounded-xl focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-50 transition-all duration-200`}>
-        <span className="text-gray-500 font-medium font-sans">₹</span>
+        <span className="text-gray-400 flex-shrink-0"><IndianRupee className="w-4 h-4" /></span>
         <input
           type="text"
           placeholder="e.g. 8,00,000"
