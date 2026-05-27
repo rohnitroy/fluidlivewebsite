@@ -260,7 +260,7 @@ function ApplicationForm({ job, onClose }) {
       if (!form.expectedCTC.trim()) e.expectedCTC = 'Expected CTC is required'
       if (!form.currentCity.trim()) e.currentCity = 'City is required'
       if (!form.workMode) e.workMode = 'Work mode preference is required'
-    if (currentStep === 2) {
+    } else if (currentStep === 2) {
       if (!cvFile) e.cv = 'Please upload your CV / Resume'
     }
     return e
