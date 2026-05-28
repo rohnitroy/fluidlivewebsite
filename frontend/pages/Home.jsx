@@ -26,10 +26,26 @@ export default function Home() {
 }
 
 function HeroSection() {
+  const videoRef = useRef(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (video) {
+      // Ensure video plays on mobile
+      const playPromise = video.play()
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay was prevented, video will play on user interaction
+        })
+      }
+    }
+  }, [])
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{backgroundColor: '#1a1a1a'}}>
       {/* Video Background */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
@@ -95,7 +111,6 @@ function HeroSection() {
           </motion.div>
         </div>
       </div>
-      {/* Removed */}
     </section>
   )
 }
