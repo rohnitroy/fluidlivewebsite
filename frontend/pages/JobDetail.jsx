@@ -75,7 +75,7 @@ export default function JobDetail() {
       <SEO
         title={job.title}
         path={`/careers/${slug}`}
-        description={`${job.title} at ${company} — ${location_}. ${type ? type + ' · ' : ''}${exp ? exp + ' experience required.' : ''}`}
+        description={`${job.title} at ${company} - ${location_}. ${type ? type + ' · ' : ''}${exp ? exp + ' experience required.' : ''}`}
         keywords={`${job.title}, ${company}, ${location_}, jobs, careers, fluid live`}
       />
 
@@ -104,7 +104,6 @@ export default function JobDetail() {
           <h1 className="text-4xl md:text-5xl font-medium text-gray-900 mb-3" style={{ letterSpacing: '-0.02em' }}>
             {job.title}
           </h1>
-          <p className="text-lg text-gray-500">{company}</p>
         </div>
 
         {/* Info bar */}

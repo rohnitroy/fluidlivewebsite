@@ -53,10 +53,10 @@ export default function Navbar() {
       <nav 
         className={`fixed w-full z-50 transition-all duration-300 ${
           isHomePage
-            ? isScrolled 
-              ? 'bg-white/95 backdrop-blur-lg' 
+            ? isScrolled || isOpen
+              ? 'bg-white' 
               : 'bg-transparent'
-            : 'bg-white/95 backdrop-blur-lg'
+            : 'bg-white'
         }`}
         aria-label="Main navigation"
       >
@@ -73,7 +73,7 @@ export default function Navbar() {
               className="flex items-center"
             >
               <img 
-                src={isHomePage && !isScrolled ? logoTransparent : logo}
+                src={isHomePage && !isScrolled && !isOpen ? logoTransparent : logo}
                 alt="FLUID.LIVE Logo" 
                 className="h-8 md:h-10 w-auto transition-all duration-300"
                 style={{ height: 'clamp(1.5rem, 6vw, 2.5rem)' }}
@@ -92,11 +92,6 @@ export default function Navbar() {
                   ? 'text-white drop-shadow-md hover:text-gray-100'
                   : 'text-gray-600 hover:text-gray-900'
               }`}>About</Link>
-              <Link to="/insights" className={`font-medium transition-colors duration-300 ${
-                isHomePage && !isScrolled
-                  ? 'text-white drop-shadow-md hover:text-gray-100'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}>Insights</Link>
               <Link to="/careers" className={`font-medium transition-colors duration-300 ${
                 isHomePage && !isScrolled
                   ? 'text-white drop-shadow-md hover:text-gray-100'
@@ -116,7 +111,7 @@ export default function Navbar() {
             <button 
               onClick={() => setIsOpen(!isOpen)}
               className={`md:hidden hover:text-blue-600 transition-colors z-50 relative ${
-                isHomePage && !isScrolled ? 'text-white drop-shadow-md' : 'text-gray-900'
+                isHomePage && !isScrolled && !isOpen ? 'text-white drop-shadow-md' : 'text-gray-900'
               }`}
               aria-label="Toggle menu"
             >
@@ -165,14 +160,6 @@ export default function Navbar() {
               style={{letterSpacing: '-0.01em'}}
             >
               About
-            </Link>
-            <Link 
-              to="/insights" 
-              onClick={() => setIsOpen(false)} 
-              className="text-2xl font-medium text-gray-900 hover:text-blue-600 transition-colors duration-200 py-4 border-b border-gray-100"
-              style={{letterSpacing: '-0.01em'}}
-            >
-              Insights
             </Link>
             <Link 
               to="/careers" 

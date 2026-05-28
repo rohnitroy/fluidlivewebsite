@@ -35,6 +35,7 @@ function HeroSection() {
         loop
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
+        style={{ pointerEvents: 'none' }}
       >
         <source src="/hero-section-bg.mp4" type="video/mp4" />
       </video>
@@ -47,9 +48,7 @@ function HeroSection() {
         background: 'linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0))'
       }} />
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col justify-between min-h-screen">
-        <div></div>
-        
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center min-h-screen">
         <div>
           <motion.div 
             className="mb-3"
@@ -95,24 +94,7 @@ function HeroSection() {
             </a>
           </motion.div>
         </div>
-
-        {/* Trusted by Section - Bottom */}
-        <motion.div 
-          className="flex flex-col items-center gap-4 pb-20"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <p className="text-sm text-gray-300 uppercase tracking-wider font-medium">Trusted by</p>
-          <img 
-            src="/clientslogos.svg" 
-            alt="Trusted clients" 
-            className="h-8 opacity-80 hover:opacity-100 transition-opacity duration-300"
-          />
-        </motion.div>
       </div>
-
-      {/* Scroll Down Arrow - Near Bottom */}
       {/* Removed */}
     </section>
   )
@@ -124,10 +106,12 @@ function PrincipleSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <span className="overline">OUR GUIDING PRINCIPLE</span>
         <h2 className="text-5xl md:text-6xl font-medium mt-6 mb-8" style={{letterSpacing: '-0.02em'}}>
-          Fluid Behaviour and Co-Creation
+          <span className="block md:inline">Fluid Behaviour</span>
+          <span className="block md:inline">and</span>
+          <span className="block md:inline">Co-Creation</span>
         </h2>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-16 leading-relaxed">
-          We are not just a vendor. We are your trusted partner for the entire business life cycle — combining the art of design with the science of technology.
+          We are not just a vendor. We are your trusted partner for the entire business life cycle - combining the art of design with the science of technology.
         </p>
         
         <div className="flex flex-wrap justify-center gap-12 mt-16">
@@ -276,7 +260,7 @@ function StatsSection() {
 
   const testimonials = [
     {
-      quote: "Fluid.Live didn't just deliver a product — they became a true partner in our AI transformation.",
+      quote: "Fluid.Live didn't just deliver a product - they became a true partner in our AI transformation.",
       author: "CEO, FINTECH SCALE-UP"
     },
     {
@@ -353,7 +337,7 @@ function StatsSection() {
             <div className="text-7xl font-medium gradient-text mb-4">{counts.projects}+</div>
             <div className="text-lg text-gray-600" style={{letterSpacing: '0.05em'}}>PROJECTS DELIVERED</div>
           </div>
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <div className="text-7xl font-medium gradient-text mb-4">{counts.industries}+</div>
             <div className="text-lg text-gray-600" style={{letterSpacing: '0.05em'}}>CLIENTS SERVED</div>
           </div>

@@ -52,13 +52,12 @@ export default function Careers() {
 
           {/* Section header */}
           <div className="text-center mb-10">
-            <span className="overline">OPEN POSITIONS</span>
             <h2 className="text-4xl md:text-5xl font-medium mt-6" style={{ letterSpacing: '-0.02em' }}>
               Current <span className="gradient-text">Openings</span>
             </h2>
             {!loading && !error && jobs.length > 0 && (
               <p className="text-gray-500 mt-4 text-lg">
-                {jobs.length} open position{jobs.length !== 1 ? 's' : ''} — find your fit
+                {jobs.length} open position{jobs.length !== 1 ? 's' : ''} available
               </p>
             )}
           </div>

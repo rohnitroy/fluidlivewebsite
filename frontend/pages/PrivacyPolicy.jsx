@@ -123,15 +123,15 @@ export default function PrivacyPolicy() {
               <ul className="space-y-2 ml-1">
                 <li className="flex items-start gap-3">
                   <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{backgroundColor: '#4F8CFF'}}></span>
-                  <span><strong>Service providers</strong> — third-party vendors who assist in operating our website and services (e.g., hosting, email delivery, analytics)</span>
+                  <span><strong>Service providers</strong> - third-party vendors who assist in operating our website and services (e.g., hosting, email delivery, analytics)</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{backgroundColor: '#4F8CFF'}}></span>
-                  <span><strong>Legal requirements</strong> — when required by law, regulation, or legal process</span>
+                  <span><strong>Legal requirements</strong> - when required by law, regulation, or legal process</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{backgroundColor: '#4F8CFF'}}></span>
-                  <span><strong>Business transfers</strong> — in connection with a merger, acquisition, or sale of assets</span>
+                  <span><strong>Business transfers</strong> - in connection with a merger, acquisition, or sale of assets</span>
                 </li>
               </ul>
             </section>

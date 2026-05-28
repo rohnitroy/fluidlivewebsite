@@ -9,7 +9,7 @@ export default function About() {
       <SEO
         title="About Us"
         path="/about"
-        description="Learn about FluidLive Solutions Pvt Ltd — an AI-first company with 300+ projects delivered across 50+ clients."
+        description="Learn about FluidLive Solutions Pvt Ltd - an AI-first company with 300+ projects delivered across 50+ clients."
         keywords="about FluidLive, AI company, team, Pune AI agency, digital transformation company"
       />
       <section className="section-spacing bg-white">
@@ -40,7 +40,7 @@ export default function About() {
               <p className="text-gray-600 text-lg leading-relaxed">
                 A world where every business, regardless of size, can leverage AI to compete, 
                 innovate, and thrive. We're building the future where technology and creativity 
-                flow together seamlessly — where art truly meets intelligence.
+                flow together seamlessly - where art truly meets intelligence.
               </p>
             </div>
           </div>
@@ -118,7 +118,7 @@ export default function About() {
                 <h3 className="text-xl font-medium text-gray-900 mb-1">Rahul Khandelwal</h3>
                 <p className="text-sm font-medium text-blue-600 mb-4">FOUNDER, CFO</p>
                 <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                  Focuses on finances and international growth. Partner at Felix Advisory — Venture Investment, Startup Advisory, M&A.
+                  Focuses on finances and international growth. Partner at Felix Advisory - Venture Investment, Startup Advisory, M&A.
                 </p>
                 <a href="https://www.linkedin.com/in/rahul-khandelwal-04b8497/" target="_blank" rel="noopener noreferrer" className="text-blue-600 text-sm font-medium hover:text-blue-700">
                   LINKEDIN →
