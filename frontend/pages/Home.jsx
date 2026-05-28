@@ -32,12 +32,21 @@ function HeroSection() {
     const video = videoRef.current
     if (!video) return
 
+    // Ensure video element has all necessary attributes
+    video.setAttribute('autoplay', 'autoplay')
+    video.setAttribute('muted', 'muted')
+    video.setAttribute('playsinline', 'playsinline')
+    video.setAttribute('loop', 'loop')
+
     // Function to attempt playing the video
     const attemptPlay = async () => {
       try {
-        await video.play()
+        const playPromise = video.play()
+        if (playPromise !== undefined) {
+          await playPromise
+        }
       } catch (error) {
-        console.log('Play failed:', error)
+        console.log('Play error:', error.message)
       }
     }
 
@@ -53,16 +62,26 @@ function HeroSection() {
       attemptPlay()
     }
 
+    const handleLoadedData = () => {
+      attemptPlay()
+    }
+
     video.addEventListener('loadedmetadata', handleLoadedMetadata)
     video.addEventListener('canplay', handleCanPlay)
+    video.addEventListener('loadeddata', handleLoadedData)
 
-    // Try again after a short delay
-    const timeoutId = setTimeout(attemptPlay, 500)
+    // Try again after delays
+    const timeoutId1 = setTimeout(attemptPlay, 100)
+    const timeoutId2 = setTimeout(attemptPlay, 500)
+    const timeoutId3 = setTimeout(attemptPlay, 1000)
 
     return () => {
-      clearTimeout(timeoutId)
+      clearTimeout(timeoutId1)
+      clearTimeout(timeoutId2)
+      clearTimeout(timeoutId3)
       video.removeEventListener('loadedmetadata', handleLoadedMetadata)
       video.removeEventListener('canplay', handleCanPlay)
+      video.removeEventListener('loadeddata', handleLoadedData)
     }
   }, [])
 
@@ -75,6 +94,7 @@ function HeroSection() {
         muted
         loop
         playsInline
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover"
         style={{ 
           pointerEvents: 'none', 
