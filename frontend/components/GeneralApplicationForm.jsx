@@ -693,7 +693,7 @@ function CountryCodeSelect({ value, onChange }) {
   }, [])
 
   return (
-    <div className="relative w-24 md:w-32 flex-shrink-0" ref={containerRef}>
+    <div className="relative w-20 md:w-28 flex-shrink-0" ref={containerRef}>
       <div 
         className={`flex items-center justify-between px-2 md:px-3 py-3 bg-white border rounded-xl cursor-pointer transition-all duration-200 ${isOpen ? 'border-blue-400 ring-2 ring-blue-50' : 'border-gray-200 hover:border-blue-300'}`}
         onClick={() => setIsOpen(!isOpen)}
