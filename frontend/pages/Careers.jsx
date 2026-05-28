@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { MapPin, Briefcase, Clock, ChevronRight, Zap, TrendingUp, Users, Loader2, AlertCircle } from 'lucide-react'
 import SEO from '../components/SEO'
+import GeneralApplicationForm from '../components/GeneralApplicationForm'
 import { fetchPublishedJobs, titleToSlug, formatSalary, formatExperience, formatPostedDate } from '../utils/jobUtils'
 
 export default function Careers() {
@@ -9,6 +10,7 @@ export default function Careers() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [filter, setFilter] = useState('All')
+  const [showGeneralForm, setShowGeneralForm] = useState(false)
 
   useEffect(() => {
     fetchPublishedJobs()
@@ -176,12 +178,18 @@ export default function Careers() {
           <p className="text-xl text-blue-100 mb-10 leading-relaxed">
             We're always open to connecting with great people. Drop us your profile and we'll reach out when something clicks.
           </p>
-          <a
-            href="mailto:hrteam@fluid.live"
-            className="px-8 py-4 text-blue-600 font-medium rounded-full transition-all duration-300 bg-white hover:bg-gray-100 text-lg"
-          >
-            Send Your Profile
-          </a>
+          {!showGeneralForm ? (
+            <button
+              onClick={() => setShowGeneralForm(true)}
+              className="px-8 py-4 text-blue-600 font-medium rounded-full transition-all duration-300 bg-white hover:bg-gray-100 text-lg"
+            >
+              Apply For Any Job Not Listed Here
+            </button>
+          ) : (
+            <div className="mt-8 text-left max-w-3xl mx-auto">
+              <GeneralApplicationForm jobs={jobs} onClose={() => setShowGeneralForm(false)} />
+            </div>
+          )}
         </div>
       </section>
     </div>
