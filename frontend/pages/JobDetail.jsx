@@ -124,9 +124,6 @@ export default function JobDetail() {
           {posted && (
             <InfoCell icon={<Calendar className="w-4 h-4 text-blue-500" />} label="Posted" value={posted} />
           )}
-          {job.noOfOpenings && (
-            <InfoCell icon={<User className="w-4 h-4 text-blue-500" />} label="Openings" value={job.noOfOpenings} />
-          )}
         </div>
 
         {/* Apply button (top) */}
@@ -216,7 +213,7 @@ const WORK_MODE_OPTIONS = ['On-site', 'Remote', 'Hybrid']
 function ApplicationForm({ job, onClose }) {
   const [step, setStep] = useState(0)
   const [form, setForm] = useState({
-    fullName: '', email: '', phone: '',
+    fullName: '', email: '', countryCode: '+91', phone: '',
     gender: '', maritalStatus: '', linkedinUrl: '',
     experience: '', currentlyWorking: '',
     currentCompany: '', noticePeriod: '', earliestJoinDate: '',
@@ -251,7 +248,7 @@ function ApplicationForm({ job, onClose }) {
       if (!form.email.trim()) e.email = 'Email is required'
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email)) e.email = 'Enter a valid email address'
       if (!form.phone.trim()) e.phone = 'Phone number is required'
-      else { const d = form.phone.replace(/\D/g,''); if (d.length !== 10) e.phone = 'Phone must be exactly 10 digits'; else if (/^(\d)\1{9}$/.test(d) || d === '1234567890') e.phone = 'Enter a valid phone number' }
+      else { const d = form.phone.replace(/\D/g,''); if (d.length < 7 || d.length > 15) e.phone = 'Enter a valid phone number'; else if (/^(\d)\1{6,}$/.test(d) || d === '1234567890') e.phone = 'Enter a valid phone number' }
     } else if (currentStep === 1) {
       if (!form.experience) e.experience = 'Experience is required'
       if (!form.currentlyWorking) e.currentlyWorking = 'Please select employment status'
@@ -405,7 +402,10 @@ function ApplicationForm({ job, onClose }) {
                     <Input icon={<Mail className="w-4 h-4" />} type="email" placeholder="you@example.com" value={form.email} onChange={v => set('email', v)} />
                   </Field>
                   <Field label="Phone Number *" error={errors.phone}>
-                    <Input icon={<Phone className="w-4 h-4" />} type="tel" placeholder="10-digit mobile number" value={form.phone} onChange={v => set('phone', v)} maxLength={10} />
+                    <div className="flex gap-2">
+                      <CountryCodeSelect value={form.countryCode} onChange={v => set('countryCode', v)} />
+                      <Input icon={<Phone className="w-4 h-4" />} type="tel" placeholder="Phone number" value={form.phone} onChange={v => set('phone', v)} />
+                    </div>
                   </Field>
                   <Field label="LinkedIn URL">
                     <Input placeholder="https://linkedin.com/in/yourprofile" value={form.linkedinUrl} onChange={v => set('linkedinUrl', v)} />
@@ -757,3 +757,106 @@ function numberToWords(num) {
   }
   return word.trim() + ' Rupees Only';
 }
+
+/* ─── Country Code Select Component ────── */
+const COUNTRY_CODES = [
+  { code: '+1', country: 'United States' },
+  { code: '+44', country: 'United Kingdom' },
+  { code: '+91', country: 'India' },
+  { code: '+61', country: 'Australia' },
+  { code: '+81', country: 'Japan' },
+  { code: '+86', country: 'China' },
+  { code: '+33', country: 'France' },
+  { code: '+49', country: 'Germany' },
+  { code: '+39', country: 'Italy' },
+  { code: '+34', country: 'Spain' },
+  { code: '+31', country: 'Netherlands' },
+  { code: '+41', country: 'Switzerland' },
+  { code: '+43', country: 'Austria' },
+  { code: '+45', country: 'Denmark' },
+  { code: '+46', country: 'Sweden' },
+  { code: '+47', country: 'Norway' },
+  { code: '+48', country: 'Poland' },
+  { code: '+55', country: 'Brazil' },
+  { code: '+56', country: 'Chile' },
+  { code: '+57', country: 'Colombia' },
+  { code: '+60', country: 'Malaysia' },
+  { code: '+62', country: 'Indonesia' },
+  { code: '+65', country: 'Singapore' },
+  { code: '+66', country: 'Thailand' },
+  { code: '+82', country: 'South Korea' },
+  { code: '+84', country: 'Vietnam' },
+  { code: '+90', country: 'Turkey' },
+  { code: '+92', country: 'Pakistan' },
+  { code: '+971', country: 'United Arab Emirates' },
+  { code: '+966', country: 'Saudi Arabia' },
+  { code: '+27', country: 'South Africa' },
+  { code: '+234', country: 'Nigeria' },
+  { code: '+64', country: 'New Zealand' },
+  { code: '+63', country: 'Philippines' },
+  { code: '+852', country: 'Hong Kong' },
+  { code: '+886', country: 'Taiwan' },
+  { code: '+98', country: 'Iran' },
+  { code: '+20', country: 'Egypt' },
+  { code: '+212', country: 'Morocco' },
+]
+
+function CountryCodeSelect({ value, onChange }) {
+  const [isOpen, setIsOpen] = useState(false)
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (containerRef.current && !containerRef.current.contains(e.target)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const selectedCountry = COUNTRY_CODES.find(c => c.code === value)?.country || 'Select'
+
+  return (
+    <div className="relative w-32 flex-shrink-0" ref={containerRef}>
+      <div 
+        className={`flex items-center justify-between px-3 py-3 bg-white border rounded-xl cursor-pointer transition-all duration-200 ${isOpen ? 'border-blue-400 ring-2 ring-blue-50' : 'border-gray-200 hover:border-blue-300'}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="text-sm font-medium text-gray-900">{value}</span>
+        <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+          <ChevronDown className="w-4 h-4 text-gray-400" />
+        </motion.div>
+      </div>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.15 }}
+            className="absolute z-50 w-48 mt-2 bg-white border border-gray-100 rounded-xl shadow-xl overflow-hidden"
+          >
+            <div className="max-h-60 overflow-y-auto py-2">
+              {COUNTRY_CODES.map((c, idx) => (
+                <div
+                  key={idx}
+                  className={`px-3 py-2.5 text-sm cursor-pointer transition-colors duration-150 flex items-center justify-between ${value === c.code ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600'}`}
+                  onClick={() => {
+                    onChange(c.code)
+                    setIsOpen(false)
+                  }}
+                >
+                  <span>{c.country}</span>
+                  <span className="text-xs font-semibold">{c.code}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+

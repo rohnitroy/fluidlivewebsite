@@ -132,6 +132,110 @@
   }
 }
 
+/* Job Description HTML Styling */
+.job-description-html {
+  @apply text-gray-700 leading-relaxed;
+}
+
+.job-description-html p {
+  @apply mb-4 text-base;
+}
+
+.job-description-html h1,
+.job-description-html h2,
+.job-description-html h3,
+.job-description-html h4,
+.job-description-html h5,
+.job-description-html h6 {
+  @apply font-semibold text-gray-900 mt-6 mb-3;
+}
+
+.job-description-html h1 {
+  @apply text-2xl;
+}
+
+.job-description-html h2 {
+  @apply text-xl;
+}
+
+.job-description-html h3 {
+  @apply text-lg;
+}
+
+.job-description-html h4,
+.job-description-html h5,
+.job-description-html h6 {
+  @apply text-base;
+}
+
+.job-description-html ul,
+.job-description-html ol {
+  @apply mb-4 ml-6;
+}
+
+.job-description-html ul {
+  @apply list-disc;
+}
+
+.job-description-html ol {
+  @apply list-decimal;
+}
+
+.job-description-html li {
+  @apply mb-2 text-base text-gray-700;
+}
+
+.job-description-html li p {
+  @apply mb-0;
+}
+
+.job-description-html strong,
+.job-description-html b {
+  @apply font-semibold text-gray-900;
+}
+
+.job-description-html em,
+.job-description-html i {
+  @apply italic;
+}
+
+.job-description-html blockquote {
+  @apply border-l-4 border-blue-400 pl-4 py-2 my-4 bg-blue-50 text-gray-700 italic;
+}
+
+.job-description-html code {
+  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono text-gray-800;
+}
+
+.job-description-html pre {
+  @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4;
+}
+
+.job-description-html pre code {
+  @apply bg-transparent px-0 py-0;
+}
+
+.job-description-html table {
+  @apply w-full border-collapse mb-4;
+}
+
+.job-description-html th,
+.job-description-html td {
+  @apply border border-gray-300 px-4 py-2 text-left;
+}
+
+.job-description-html th {
+  @apply bg-gray-100 font-semibold text-gray-900;
+}
+
+.job-description-html a {
+  @apply text-blue-600 hover:text-blue-700 underline;
+}
+
+.job-description-html hr {
+  @apply my-6 border-gray-300;
+}
+
 * {
   scroll-behavior: smooth;
   text-decoration: none;

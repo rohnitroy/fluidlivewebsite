@@ -258,19 +258,7 @@ function JobCard({ job }) {
           )}
         </div>
 
-        {/* Salary + Posted */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-          {salary ? (
-            <span className="text-sm font-semibold text-green-700 bg-green-50 px-3 py-1 rounded-full">
-              {salary}
-            </span>
-          ) : (
-            <span className="text-sm text-gray-400">Competitive</span>
-          )}
-          {posted && (
-            <span className="text-xs text-gray-400">{posted}</span>
-          )}
-        </div>
+
       </div>
     </Link>
   )
