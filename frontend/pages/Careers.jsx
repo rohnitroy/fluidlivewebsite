@@ -229,17 +229,16 @@ function JobCard({ job }) {
       <div className="p-7">
         {/* Top meta row */}
         <div className="flex items-start justify-between gap-4 mb-4">
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             {/* Type badge */}
             {type && (
               <span className="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-600 mb-3 border border-blue-100">
                 {type}
               </span>
             )}
-            <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-200 leading-tight">
+            <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200 leading-tight">
               {job.title}
             </h3>
-            <p className="text-sm text-gray-500 mt-1">{company}</p>
           </div>
           <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-200 flex-shrink-0 mt-1" />
         </div>
