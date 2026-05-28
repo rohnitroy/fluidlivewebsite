@@ -64,7 +64,12 @@ function HeroSection() {
         playsInline
         onLoadedMetadata={handleVideoLoad}
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ pointerEvents: 'none', WebkitPlaysinline: 'true' }}
+        style={{ 
+          pointerEvents: 'none', 
+          WebkitPlaysinline: 'true',
+          WebkitUserSelect: 'none',
+          userSelect: 'none'
+        }}
       >
         <source src="/hero-section-bg.mp4" type="video/mp4" />
       </video>
