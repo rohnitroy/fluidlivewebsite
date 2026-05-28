@@ -234,7 +234,9 @@ export default function GeneralApplicationForm({ jobs = [], onClose }) {
                   <Field label="Phone Number *" error={errors.phone}>
                     <div className="flex gap-2">
                       <CountryCodeSelect value={form.countryCode} onChange={v => set('countryCode', v)} />
-                      <Input icon={<Phone className="w-4 h-4" />} type="tel" placeholder="Phone number" value={form.phone} onChange={v => set('phone', v)} />
+                      <div className="flex-1 min-w-0">
+                        <Input icon={<Phone className="w-4 h-4" />} type="tel" placeholder="Phone number" value={form.phone} onChange={v => set('phone', v)} />
+                      </div>
                     </div>
                   </Field>
                   <Field label="LinkedIn URL" error={errors.linkedinUrl}>
