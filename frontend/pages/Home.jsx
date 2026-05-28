@@ -31,15 +31,27 @@ function HeroSection() {
   useEffect(() => {
     const video = videoRef.current
     if (video) {
-      // Ensure video plays on mobile
-      const playPromise = video.play()
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Autoplay was prevented, video will play on user interaction
-        })
-      }
+      // Force video to play on iOS and other browsers
+      video.play().catch(() => {
+        // Autoplay was prevented, try again on user interaction
+        const playOnInteraction = () => {
+          video.play().catch(() => {})
+          document.removeEventListener('touchstart', playOnInteraction)
+          document.removeEventListener('click', playOnInteraction)
+        }
+        document.addEventListener('touchstart', playOnInteraction, { once: true })
+        document.addEventListener('click', playOnInteraction, { once: true })
+      })
     }
   }, [])
+
+  const handleVideoLoad = () => {
+    // Ensure video plays when it's loaded
+    const video = videoRef.current
+    if (video) {
+      video.play().catch(() => {})
+    }
+  }
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{backgroundColor: '#1a1a1a'}}>
@@ -50,8 +62,9 @@ function HeroSection() {
         muted
         loop
         playsInline
+        onLoadedMetadata={handleVideoLoad}
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ pointerEvents: 'none' }}
+        style={{ pointerEvents: 'none', WebkitPlaysinline: 'true' }}
       >
         <source src="/hero-section-bg.mp4" type="video/mp4" />
       </video>
