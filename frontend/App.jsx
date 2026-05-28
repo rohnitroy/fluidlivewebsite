@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import { AdminProvider } from './context/AdminContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -80,6 +81,7 @@ function App() {
         </main>
         <Footer />
         <CookieBanner />
+        <Analytics />
       </div>
     </AdminProvider>
   )
