@@ -1,10 +1,22 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../public/logo.png'
+import logoTransparent from '../public/fluidlive-bgfree-logo.png'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
+  const isHomePage = location.pathname === '/'
+
+  // Handle scroll to change navbar background
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   // Close menu when route changes
   useEffect(() => {
@@ -38,7 +50,16 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed w-full z-50 backdrop-blur-lg bg-white/95" aria-label="Main navigation">
+      <nav 
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          isHomePage
+            ? isScrolled 
+              ? 'bg-white/95 backdrop-blur-lg' 
+              : 'bg-transparent'
+            : 'bg-white/95 backdrop-blur-lg'
+        }`}
+        aria-label="Main navigation"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <a 
@@ -52,7 +73,7 @@ export default function Navbar() {
               className="flex items-center"
             >
               <img 
-                src={logo}
+                src={isHomePage && !isScrolled ? logoTransparent : logo}
                 alt="FLUID.LIVE Logo" 
                 className="h-8 md:h-10 w-auto transition-all duration-300"
                 style={{ height: 'clamp(1.5rem, 6vw, 2.5rem)' }}
@@ -61,13 +82,31 @@ export default function Navbar() {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-10">
-              <a href="/#services" className="text-gray-600 hover:text-gray-900 transition-colors duration-300">Services</a>
-              <Link to="/about" className="text-gray-600 hover:text-gray-900 transition-colors duration-300">About</Link>
-              <Link to="/insights" className="text-gray-600 hover:text-gray-900 transition-colors duration-300">Insights</Link>
-              <Link to="/careers" className="text-gray-600 hover:text-gray-900 transition-colors duration-300">Careers</Link>
+              <a href="/#services" className={`font-medium transition-colors duration-300 ${
+                isHomePage && !isScrolled
+                  ? 'text-white drop-shadow-md hover:text-gray-100'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}>Services</a>
+              <Link to="/about" className={`font-medium transition-colors duration-300 ${
+                isHomePage && !isScrolled
+                  ? 'text-white drop-shadow-md hover:text-gray-100'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}>About</Link>
+              <Link to="/insights" className={`font-medium transition-colors duration-300 ${
+                isHomePage && !isScrolled
+                  ? 'text-white drop-shadow-md hover:text-gray-100'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}>Insights</Link>
+              <Link to="/careers" className={`font-medium transition-colors duration-300 ${
+                isHomePage && !isScrolled
+                  ? 'text-white drop-shadow-md hover:text-gray-100'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}>Careers</Link>
               <Link 
                 to="/contact" 
-                className="btn-primary"
+                className={`btn-primary transition-all duration-300 ${
+                  isHomePage && !isScrolled ? 'bg-white text-blue-600 hover:bg-gray-100' : ''
+                }`}
               >
                 Contact Us
               </Link>
@@ -76,7 +115,9 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button 
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-gray-900 hover:text-blue-600 transition-colors z-50 relative"
+              className={`md:hidden hover:text-blue-600 transition-colors z-50 relative ${
+                isHomePage && !isScrolled ? 'text-white drop-shadow-md' : 'text-gray-900'
+              }`}
               aria-label="Toggle menu"
             >
               <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>

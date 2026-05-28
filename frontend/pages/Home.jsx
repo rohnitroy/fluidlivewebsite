@@ -7,7 +7,7 @@ import SEO from '../components/SEO'
 
 export default function Home() {
   return (
-    <div className="pt-4">
+    <div>
       <SEO
         path="/"
         description="Fluid.Live delivers cutting-edge AI solutions, digital transformation, and intelligent automation for businesses across 50+ industries. From strategy to deployment."
@@ -27,101 +27,20 @@ export default function Home() {
 
 function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
-      {/* Animated Wave Background - Professional & Smooth */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Wave Layer 1 - Bottom */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-64"
-          style={{
-            background: 'linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.08) 100%)',
-          }}
-        >
-          <svg
-            className="absolute bottom-0 w-full h-full"
-            viewBox="0 0 1440 320"
-            preserveAspectRatio="none"
-          >
-            <motion.path
-              fill="rgba(96, 165, 250, 0.15)"
-              d="M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,154.7C840,149,960,171,1080,186.7C1200,203,1320,213,1380,218.7L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-              animate={{
-                d: [
-                  "M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,154.7C840,149,960,171,1080,186.7C1200,203,1320,213,1380,218.7L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z",
-                  "M0,192L60,181.3C120,171,240,149,360,154.7C480,160,600,192,720,197.3C840,203,960,181,1080,165.3C1200,149,1320,139,1380,133.3L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z",
-                  "M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,154.7C840,149,960,171,1080,186.7C1200,203,1320,213,1380,218.7L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-                ]
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          </svg>
-        </motion.div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{backgroundColor: '#1a1a1a'}}>
+      {/* Video Background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/hero-section-bg.mp4" type="video/mp4" />
+      </video>
 
-        {/* Wave Layer 2 - Middle */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-56"
-        >
-          <svg
-            className="absolute bottom-0 w-full h-full"
-            viewBox="0 0 1440 320"
-            preserveAspectRatio="none"
-          >
-            <motion.path
-              fill="rgba(79, 140, 255, 0.12)"
-              d="M0,96L60,112C120,128,240,160,360,160C480,160,600,128,720,122.7C840,117,960,139,1080,138.7C1200,139,1320,117,1380,106.7L1440,96L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-              animate={{
-                d: [
-                  "M0,96L60,112C120,128,240,160,360,160C480,160,600,128,720,122.7C840,117,960,139,1080,138.7C1200,139,1320,117,1380,106.7L1440,96L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z",
-                  "M0,128L60,138.7C120,149,240,171,360,165.3C480,160,600,128,720,122.7C840,117,960,139,1080,154.7C1200,171,1320,181,1380,186.7L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z",
-                  "M0,96L60,112C120,128,240,160,360,160C480,160,600,128,720,122.7C840,117,960,139,1080,138.7C1200,139,1320,117,1380,106.7L1440,96L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-                ]
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1
-              }}
-            />
-          </svg>
-        </motion.div>
-
-        {/* Wave Layer 3 - Top */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-48"
-        >
-          <svg
-            className="absolute bottom-0 w-full h-full"
-            viewBox="0 0 1440 320"
-            preserveAspectRatio="none"
-          >
-            <motion.path
-              fill="rgba(59, 130, 246, 0.1)"
-              d="M0,64L60,80C120,96,240,128,360,128C480,128,600,96,720,90.7C840,85,960,107,1080,106.7C1200,107,1320,85,1380,74.7L1440,64L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-              animate={{
-                d: [
-                  "M0,64L60,80C120,96,240,128,360,128C480,128,600,96,720,90.7C840,85,960,107,1080,106.7C1200,107,1320,85,1380,74.7L1440,64L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z",
-                  "M0,96L60,106.7C120,117,240,139,360,133.3C480,128,600,96,720,90.7C840,85,960,107,1080,122.7C1200,139,1320,149,1380,154.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z",
-                  "M0,64L60,80C120,96,240,128,360,128C480,128,600,96,720,90.7C840,85,960,107,1080,106.7C1200,107,1320,85,1380,74.7L1440,64L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-                ]
-              }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 2
-              }}
-            />
-          </svg>
-        </motion.div>
-
-        {/* Subtle Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-transparent pointer-events-none" />
-      </div>
+      {/* Dark Overlay - 40% opacity */}
+      <div className="absolute inset-0 bg-black/40" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div 
@@ -130,13 +49,13 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="overline inline-block px-5 py-2 rounded-full bg-blue-50">
+          <span className="overline inline-block px-5 py-2 rounded-full bg-white/10 text-white">
             TECHNOCREATIVE FLUID BLEND
           </span>
         </motion.div>
         
         <motion.h1 
-          className="text-6xl md:text-8xl font-medium mb-8 leading-tight" 
+          className="text-6xl md:text-8xl font-medium mb-8 leading-tight text-white" 
           style={{letterSpacing: '-0.02em'}}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -146,7 +65,7 @@ function HeroSection() {
         </motion.h1>
         
         <motion.p 
-          className="text-xl md:text-2xl text-gray-600 mb-16 max-w-4xl mx-auto leading-relaxed md:whitespace-nowrap"
+          className="text-xl md:text-2xl text-gray-200 mb-16 max-w-4xl mx-auto leading-relaxed md:whitespace-nowrap"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -168,6 +87,19 @@ function HeroSection() {
           </a>
         </motion.div>
       </div>
+
+      {/* Scroll Down Arrow - Near Bottom */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <a href="/#services" className="flex justify-center">
+          <svg className="w-6 h-6 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </a>
+      </motion.div>
     </section>
   )
 }

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import logo from '../public/Rectange-Logo-1500px-White-Transparent.png'
 
 export default function Footer() {
   return (
@@ -11,7 +10,7 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="col-span-1 sm:col-span-2 lg:col-span-2 text-center sm:text-left">
             <img 
-              src={logo}
+              src="/Rectange-Logo-1500px-White-Transparent.png"
               alt="FLUID.LIVE Logo" 
               className="h-8 sm:h-10 md:h-12 w-auto mb-4 mx-auto sm:mx-0"
             />
