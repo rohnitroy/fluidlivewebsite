@@ -54,6 +54,9 @@ export default function GeneralApplicationForm({ jobs = [], onClose }) {
       else { const d = form.phone.replace(/\D/g,''); if (d.length < 7 || d.length > 15) e.phone = 'Enter a valid phone number'; else if (/^(\d)\1{6,}$/.test(d) || d === '1234567890') e.phone = 'Enter a valid phone number' }
       if (!form.jobProfileSelect) e.jobProfileSelect = 'Please select a job profile'
       if (form.jobProfileSelect === 'Other' && !form.jobProfile.trim()) e.jobProfile = 'Please specify the job role'
+      if (form.linkedinUrl && form.linkedinUrl.trim() !== '' && !/^(https?:\/\/)?([\w]+\.)?linkedin\.com\/.*$/i.test(form.linkedinUrl)) {
+        e.linkedinUrl = 'Enter a valid LinkedIn URL'
+      }
     } else if (currentStep === 1) {
       if (!form.experience) e.experience = 'Experience is required'
       if (!form.currentlyWorking) e.currentlyWorking = 'Please select employment status'
@@ -290,7 +293,7 @@ export default function GeneralApplicationForm({ jobs = [], onClose }) {
                   <CTCField label="Expected CTC (Annual) *" error={errors.expectedCTC} value={form.expectedCTC} onChange={v => set('expectedCTC', v)} />
 
                   <Field label="Current City *" error={errors.currentCity}>
-                    <Input icon={<MapPinned className="w-4 h-4" />} placeholder="City you are based in" value={form.currentCity} onChange={v => set('currentCity', v)} />
+                    <Input icon={<MapPinned className="w-4 h-4" />} placeholder="City you are based in" value={form.currentCity} onChange={v => set('currentCity', v)} list="indian-cities" />
                   </Field>
                   <Field label="Work Mode Preference *" error={errors.workMode}>
                     <CustomSelect value={form.workMode} onChange={v => set('workMode', v)} options={WORK_MODE_OPTIONS} placeholder="Select preference" />
@@ -396,6 +399,58 @@ export default function GeneralApplicationForm({ jobs = [], onClose }) {
           </button>
         )}
       </div>
+      <datalist id="indian-cities">
+        <option value="Mumbai, Maharashtra" />
+        <option value="Delhi, NCR" />
+        <option value="Bangalore, Karnataka" />
+        <option value="Hyderabad, Telangana" />
+        <option value="Pune, Maharashtra" />
+        <option value="Chennai, Tamil Nadu" />
+        <option value="Kolkata, West Bengal" />
+        <option value="Ahmedabad, Gujarat" />
+        <option value="Jaipur, Rajasthan" />
+        <option value="Surat, Gujarat" />
+        <option value="Lucknow, Uttar Pradesh" />
+        <option value="Kanpur, Uttar Pradesh" />
+        <option value="Nagpur, Maharashtra" />
+        <option value="Indore, Madhya Pradesh" />
+        <option value="Thane, Maharashtra" />
+        <option value="Bhopal, Madhya Pradesh" />
+        <option value="Visakhapatnam, Andhra Pradesh" />
+        <option value="Pimpri-Chinchwad, Maharashtra" />
+        <option value="Patna, Bihar" />
+        <option value="Vadodara, Gujarat" />
+        <option value="Ghaziabad, Uttar Pradesh" />
+        <option value="Ludhiana, Punjab" />
+        <option value="Agra, Uttar Pradesh" />
+        <option value="Nashik, Maharashtra" />
+        <option value="Ranchi, Jharkhand" />
+        <option value="Faridabad, Haryana" />
+        <option value="Meerut, Uttar Pradesh" />
+        <option value="Rajkot, Gujarat" />
+        <option value="Kalyan-Dombivli, Maharashtra" />
+        <option value="Vasai-Virar, Maharashtra" />
+        <option value="Varanasi, Uttar Pradesh" />
+        <option value="Srinagar, Jammu and Kashmir" />
+        <option value="Aurangabad, Maharashtra" />
+        <option value="Dhanbad, Jharkhand" />
+        <option value="Amritsar, Punjab" />
+        <option value="Navi Mumbai, Maharashtra" />
+        <option value="Allahabad, Uttar Pradesh" />
+        <option value="Howrah, West Bengal" />
+        <option value="Gwalior, Madhya Pradesh" />
+        <option value="Jabalpur, Madhya Pradesh" />
+        <option value="Coimbatore, Tamil Nadu" />
+        <option value="Vijayawada, Andhra Pradesh" />
+        <option value="Jodhpur, Rajasthan" />
+        <option value="Madurai, Tamil Nadu" />
+        <option value="Raipur, Chhattisgarh" />
+        <option value="Kota, Rajasthan" />
+        <option value="Guwahati, Assam" />
+        <option value="Chandigarh" />
+        <option value="Gurgaon, Haryana" />
+        <option value="Noida, Uttar Pradesh" />
+      </datalist>
     </div>
   )
 }
