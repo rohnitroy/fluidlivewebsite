@@ -148,7 +148,7 @@ export const staticJobs = [
     "minSalary": "200000.00",
     "maxSalary": null,
     "paperformId": "fluidlive-hr-internship",
-    "applyUrl": "/careers/intern?HR-Internship"
+    "applyUrl": "/careers/intern?job=HR-Internship"
   },
   {
     "id": "66",
@@ -243,7 +243,7 @@ export const staticJobs = [
     "minSalary": "200000.00",
     "maxSalary": null,
     "paperformId": "fluidlive-accounting-intern",
-    "applyUrl": "/careers/intern?Accounting-Intern"
+    "applyUrl": "/careers/intern?job=Accounting-Intern"
   },
   {
     "id": "71",
