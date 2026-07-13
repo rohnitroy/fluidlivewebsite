@@ -46,12 +46,12 @@ export default function ApplyIntern() {
           Back to Openings
         </Link>
         
-        {/* Render the iframe directly with scrolling disabled and large min-height to fit form completely */}
+        {/* Render the iframe with scrolling auto and responsive heights to prevent mobile overlaps */}
         <iframe
           src={`https://${activePaperformId}.paperform.co${search}`}
           title="Internship Application Form"
-          className="w-full min-h-[900px] border-0 bg-transparent"
-          scrolling="no"
+          className="w-full min-h-[650px] md:min-h-[900px] h-[75vh] md:h-auto border-0 bg-transparent"
+          scrolling="auto"
           allow="geolocation; microphone; camera"
         />
       </div>
