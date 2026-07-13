@@ -34,7 +34,8 @@ export const staticJobs = [
     "registrationClosingDate": "2026-11-29T00:00:00.000Z",
     "minSalary": "1000000.00",
     "maxSalary": "1200000.00",
-    "paperformId": "fluidlive-full-stack-python-developer-3-years"
+    "paperformId": "fluidlive-full-stack-python-developer-3-years",
+    "applyUrl": "/careers/apply?job=Full-Stack-Python-Developer"
   },
   {
     "id": "68",
@@ -85,7 +86,8 @@ export const staticJobs = [
     "registrationClosingDate": "2026-11-28T00:00:00.000Z",
     "minSalary": "700000.00",
     "maxSalary": "1000000.00",
-    "paperformId": "fluidlive-customer-support-engineer-2-5-years"
+    "paperformId": "fluidlive-customer-support-engineer-2-5-years",
+    "applyUrl": "/careers/apply?job=Customer-Support-Engineer"
   },
   {
     "id": "67",
@@ -115,7 +117,8 @@ export const staticJobs = [
     "registrationClosingDate": "2026-11-19T00:00:00.000Z",
     "minSalary": "800000.00",
     "maxSalary": "0.00",
-    "paperformId": "fluidlive-manager-talent-acquisition-6-years"
+    "paperformId": "fluidlive-manager-talent-acquisition-6-years",
+    "applyUrl": "/careers/apply?job=Manager-Talent-Acquisition"
   },
   {
     "id": "74",
@@ -144,7 +147,8 @@ export const staticJobs = [
     "registrationClosingDate": "2026-11-29T00:00:00.000Z",
     "minSalary": "200000.00",
     "maxSalary": null,
-    "paperformId": "fluidlive-hr-internship"
+    "paperformId": "fluidlive-hr-internship",
+    "applyUrl": "/careers/intern?HR-Internship"
   },
   {
     "id": "66",
@@ -175,7 +179,8 @@ export const staticJobs = [
     "registrationClosingDate": "2026-11-21T00:00:00.000Z",
     "minSalary": "500000.00",
     "maxSalary": "700000.00",
-    "paperformId": "fluidlive-qa-automation-selenium-2-years"
+    "paperformId": "fluidlive-qa-automation-selenium-2-years",
+    "applyUrl": "/careers/apply?job=QA-Automation-Selenium"
   },
   {
     "id": "70",
@@ -206,7 +211,8 @@ export const staticJobs = [
     "registrationClosingDate": "2026-11-29T00:00:00.000Z",
     "minSalary": "450000.00",
     "maxSalary": "550000.00",
-    "paperformId": "fluidlive-qa-engineer-insurance-2-years"
+    "paperformId": "fluidlive-qa-engineer-insurance-2-years",
+    "applyUrl": "/careers/apply?job=QA-Engineer-Insurance"
   },
   {
     "id": "75",
@@ -236,7 +242,8 @@ export const staticJobs = [
     "registrationClosingDate": "2026-11-29T00:00:00.000Z",
     "minSalary": "200000.00",
     "maxSalary": null,
-    "paperformId": "fluidlive-accounting-intern"
+    "paperformId": "fluidlive-accounting-intern",
+    "applyUrl": "/careers/intern?Accounting-Intern"
   },
   {
     "id": "71",
@@ -277,7 +284,8 @@ export const staticJobs = [
     "registrationClosingDate": "2026-11-29T00:00:00.000Z",
     "minSalary": "1200000.00",
     "maxSalary": "1600000.00",
-    "paperformId": "fluidlive-solution-architect-python-8-years"
+    "paperformId": "fluidlive-solution-architect-python-8-years",
+    "applyUrl": "/careers/apply?job=Solution-Architect-Python"
   },
   {
     "id": "69",
@@ -310,6 +318,7 @@ export const staticJobs = [
     "registrationClosingDate": "2026-11-29T00:00:00.000Z",
     "minSalary": "350000.00",
     "maxSalary": "400000.00",
-    "paperformId": "fluidlive-content-analyst-0-3-years"
+    "paperformId": "fluidlive-content-analyst-0-3-years",
+    "applyUrl": "/careers/apply?job=Content-Analyst"
   }
 ];

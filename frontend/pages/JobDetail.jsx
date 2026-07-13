@@ -111,7 +111,7 @@ export default function JobDetail() {
 
         {/* Apply button (top) */}
         <div className="mb-12">
-          <Link to="#" className="btn-primary inline-block text-center w-full md:w-auto text-lg">
+          <Link to={job.applyUrl || '#'} className="btn-primary inline-block text-center w-full md:w-auto text-lg">
             Apply for This Role →
           </Link>
         </div>
@@ -143,7 +143,7 @@ export default function JobDetail() {
 
         {/* Apply button (bottom) */}
         <div className="border-t border-gray-100 pt-10">
-          <Link to="#" className="btn-primary inline-block text-center w-full text-lg">
+          <Link to={job.applyUrl || '#'} className="btn-primary inline-block text-center w-full text-lg">
             Apply Now
           </Link>
         </div>

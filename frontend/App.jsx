@@ -38,6 +38,7 @@ function App() {
             <Route path="/careers-new" element={<CareersNew />} />
             <Route path="/careers/apply" element={<ApplyJob />} />
             <Route path="/careers/apply/:paperformId" element={<ApplyJob />} />
+            <Route path="/careers/intern" element={<ApplyIntern />} />
             <Route path="/careers/intern/:paperformId" element={<ApplyIntern />} />
             <Route path="/careers/:slug" element={<JobDetail />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
