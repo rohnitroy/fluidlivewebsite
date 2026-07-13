@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 
-export default function SEO({ title, description, keywords, path, type = 'website', image, article }) {
+export default function SEO({ title, description, keywords, path, type = 'website', image, article, noIndex }) {
   const siteUrl = 'https://fluid.live'
   const defaultImage = `${siteUrl}/Rectange-Logo-1500px-White-Transparent.png`
   const fullUrl = `${siteUrl}${path || ''}`
@@ -51,6 +51,7 @@ export default function SEO({ title, description, keywords, path, type = 'websit
 
   return (
     <Helmet>
+      {noIndex && <meta name="robots" content="noindex, nofollow" />}
       <title>{fullTitle}</title>
       <meta name="description" content={description || defaultDescription} />
       {keywords && <meta name="keywords" content={keywords} />}

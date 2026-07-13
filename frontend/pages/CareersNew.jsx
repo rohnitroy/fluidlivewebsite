@@ -5,7 +5,7 @@ import SEO from '../components/SEO'
 import GeneralApplicationForm from '../components/GeneralApplicationForm'
 import { fetchPublishedJobs, titleToSlug, formatSalary, formatExperience, formatPostedDate } from '../utils/jobUtils'
 
-export default function Careers() {
+export default function CareersNew() {
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -27,9 +27,10 @@ export default function Careers() {
     <div className="pt-4">
       <SEO
         title="Careers"
-        path="/careers"
+        path="/careers-new"
         description="Join FluidLive Solutions. We're looking for talented individuals passionate about AI, design, and technology to shape the future."
         keywords="FluidLive careers, AI jobs, tech jobs Pune, join FluidLive, fluid live jobs"
+        noIndex={true}
       />
 
       {/* ── Hero ─────────────────────────────────────────────────── */}

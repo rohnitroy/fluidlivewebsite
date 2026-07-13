@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Brain, Settings, Palette, TrendingUp, BarChart3, GraduationCap, Wrench, Zap, Sparkles, Waves } from 'lucide-react'
+import { Brain, Settings, Palette, TrendingUp, BarChart3, GraduationCap, Wrench, Zap, Sparkles, Waves, Code2, Users, Briefcase, Cpu } from 'lucide-react'
 import { io } from 'socket.io-client'
 import SEO from '../components/SEO'
 
@@ -171,8 +171,8 @@ function PrincipleSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <span className="overline">OUR GUIDING PRINCIPLE</span>
         <h2 className="text-5xl md:text-6xl font-medium mt-6 mb-8" style={{letterSpacing: '-0.02em'}}>
-          <span className="block md:inline">Fluid Behaviour</span>
-          <span className="block md:inline">and</span>
+          <span className="block md:inline">Fluid Behaviour</span>{' '}
+          <span className="block md:inline">and</span>{' '}
           <span className="block md:inline">Co-Creation</span>
         </h2>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-16 leading-relaxed">
@@ -201,34 +201,40 @@ function PrincipleSection() {
 function ServicesSection() {
   const services = [
     {
+      id: 'dev-center',
+      icon: Code2,
+      title: 'Dedicated Development Center',
+      description: 'Scale your engineering capabilities with a dedicated team of elite developers, QA engineers, and product managers aligned with your goals.'
+    },
+    {
+      id: 'staff-aug',
+      icon: Users,
+      title: 'Technical Staff Augmentation',
+      description: 'Bridge skill gaps instantly with our pre-vetted senior tech talent. On-demand engineers who integrate seamlessly with your existing workflows.'
+    },
+    {
+      id: 'talent-consultancy',
+      icon: Briefcase,
+      title: 'Talent Acquisition Consultancy',
+      description: 'Streamline your hiring lifecycle. We help you design recruitment frameworks, source top tech talent, and build high-performing teams.'
+    },
+    {
       id: 'ai-strategy',
       icon: Brain,
       title: 'AI Strategy & Consulting',
-      description: 'We audit your current state, identify high-impact AI opportunities, and co-create a prioritised transformation plan.'
+      description: 'We audit your business processes, identify high-impact AI opportunities, and co-create a prioritized AI adoption and transformation roadmap.'
+    },
+    {
+      id: 'custom-ai',
+      icon: Cpu,
+      title: 'Custom AI Solutions',
+      description: 'End-to-end engineering of bespoke AI systems. From integrating large language models to building custom predictive analytics platforms.'
     },
     {
       id: 'ai-products',
-      icon: Settings,
+      icon: Sparkles,
       title: 'AI-Powered Products',
-      description: 'We design and build bespoke AI agents, chatbots, and automation tools. From prototype to production.'
-    },
-    {
-      id: 'ai-creative',
-      icon: Palette,
-      title: 'AI-Enhanced Creative',
-      description: 'Brand identity, visual design, and content. Crafted by humans, accelerated by AI.'
-    },
-    {
-      id: 'ai-marketing',
-      icon: TrendingUp,
-      title: 'AI for Marketing & Sales',
-      description: 'AI-powered campaigns, lead generation, and sales automation that target the right person at the right moment.'
-    },
-    {
-      id: 'custom-solutions',
-      icon: Wrench,
-      title: 'Custom AI Solutions',
-      description: 'End-to-end development of bespoke AI systems. From complex integrations to full-stack AI platforms.'
+      description: 'We design and build ready-to-scale AI applications, agents, chatbots, and automation tools engineered to deliver instant business value.'
     }
   ]
 
@@ -241,7 +247,7 @@ function ServicesSection() {
         <div className="text-center mb-20">
           <span className="overline">WHAT WE DO</span>
           <h2 className="text-5xl md:text-6xl font-medium mt-6" style={{letterSpacing: '-0.02em'}}>
-            Full-spectrum AI services, <br /><span className="gradient-text">one trusted partner.</span>
+            Full-spectrum Talent + AI services, <br /><span className="gradient-text">one trusted partner.</span>
           </h2>
         </div>
         

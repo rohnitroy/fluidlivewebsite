@@ -1,3 +1,5 @@
+import { staticJobs } from '../data/staticJobs'
+
 // FluidJobs API base URL
 export const FLUIDJOBS_API = 'https://api.fluidjobs.ai/api'
 
@@ -62,15 +64,10 @@ export function formatPostedDate(dateStr) {
 }
 
 /**
- * Fetch all published jobs from FluidJobs API
+ * Fetch all published jobs (returns static data)
  */
 export async function fetchPublishedJobs() {
-  const res = await fetch(`${FLUIDJOBS_API}/jobs-enhanced/published`, {
-    headers: { 'Content-Type': 'application/json' }
-  })
-  if (!res.ok) throw new Error('Failed to fetch jobs')
-  const data = await res.json()
-  return data.success ? data.jobs : []
+  return staticJobs
 }
 
 /**

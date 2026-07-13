@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
+Disallow: /careers-new
 
 Sitemap: https://fluid.live/sitemap.xml
 Sitemap: https://fluidlivewebsite.onrender.com/api/sitemap

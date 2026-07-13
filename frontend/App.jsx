@@ -10,7 +10,10 @@ import About from './pages/About'
 import Insights from './pages/Insights'
 import Contact from './pages/Contact'
 import Careers from './pages/Careers'
+import CareersNew from './pages/CareersNew'
 import JobDetail from './pages/JobDetail'
+import ApplyJob from './pages/ApplyJob'
+import ApplyIntern from './pages/ApplyIntern'
 import AdminLogin from './pages/AdminLogin'
 import AdminDashboard from './pages/AdminDashboard'
 import AdminBlog from './pages/AdminBlog'
@@ -32,6 +35,10 @@ function App() {
             <Route path="/insights/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/careers-new" element={<CareersNew />} />
+            <Route path="/careers/apply" element={<ApplyJob />} />
+            <Route path="/careers/apply/:paperformId" element={<ApplyJob />} />
+            <Route path="/careers/intern/:paperformId" element={<ApplyIntern />} />
             <Route path="/careers/:slug" element={<JobDetail />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             
