@@ -127,19 +127,6 @@ export default function Careers() {
                   <JobCard key={job.id} job={job} />
                 ))}
               </div>
-              
-              {filter.toLowerCase() === 'internship' && (
-                <div className="text-center mt-12 bg-white rounded-2xl p-8 border border-gray-200 shadow-sm max-w-2xl mx-auto">
-                  <h3 className="text-xl font-medium text-gray-900 mb-3">Looking for a different internship?</h3>
-                  <p className="text-gray-500 mb-6">If you don't see the specific internship you are looking for, you can still apply and tell us about your skills.</p>
-                  <Link
-                    to="/intern"
-                    className="px-8 py-3 text-white font-medium rounded-full transition-all duration-300 bg-blue-600 hover:bg-blue-700 text-base inline-block"
-                  >
-                    Apply For Any Internship Not Listed Here
-                  </Link>
-                </div>
-              )}
             </div>
           )}
         </div>
