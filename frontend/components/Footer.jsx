@@ -95,10 +95,10 @@ export default function Footer() {
             <ul className="space-y-2 sm:space-y-3 text-gray-300">
               <li>
                 <a 
-                  href="mailto:hrteam@fluid.live" 
+                  href="mailto:sales@fluid.live" 
                   className="hover:text-white transition-colors duration-300 text-sm sm:text-base break-all"
                 >
-                  hrteam@fluid.live
+                  sales@fluid.live
                 </a>
               </li>
               <li>
