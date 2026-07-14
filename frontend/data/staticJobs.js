@@ -163,7 +163,7 @@ export const staticJobs = [
     "paperformId": "fluidlive-content-analyst-0-3-years",
     "applyUrl": "/apply?job=Content-Analyst"
   },
-  {
+  { // Data Research Analyst
     "id": "76",
     "slug": "dra2",
     "title": "Data Research Analyst | 2+ Years",
