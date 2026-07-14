@@ -200,12 +200,20 @@ export default function Careers() {
           <p className="text-xl text-blue-100 mb-10 leading-relaxed">
             We're always open to connecting with great people. Drop us your profile and we'll reach out when something clicks.
           </p>
-          <Link
-            to="/apply"
-            className="px-8 py-4 text-blue-600 font-medium rounded-full transition-all duration-300 bg-white hover:bg-gray-100 text-lg inline-block"
-          >
-            Apply For Any Job Not Listed Here
-          </Link>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <Link
+              to="/apply"
+              className="px-8 py-4 text-blue-600 font-medium rounded-full transition-all duration-300 bg-white hover:bg-gray-100 text-lg inline-block"
+            >
+              Apply For Any Job Not Listed Here
+            </Link>
+            <Link
+              to="/intern"
+              className="px-8 py-4 text-blue-600 font-medium rounded-full transition-all duration-300 bg-white hover:bg-gray-100 text-lg inline-block"
+            >
+              Apply For Any Internship Not Listed Here
+            </Link>
+          </div>
         </div>
       </section>
     </div>
