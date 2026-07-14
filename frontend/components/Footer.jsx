@@ -82,8 +82,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/careers" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm sm:text-base">
-                  Careers
+                <Link to="/jobs" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm sm:text-base">
+                  Jobs
                 </Link>
               </li>
             </ul>

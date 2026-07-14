@@ -21,7 +21,7 @@ export function titleToSlug(title) {
  * Find a job from a list by matching its title slug
  */
 export function findJobBySlug(jobs, slug) {
-  return jobs.find(job => titleToSlug(job.title) === slug) || null
+  return jobs.find(job => (job.slug || titleToSlug(job.title)) === slug) || null
 }
 
 /**

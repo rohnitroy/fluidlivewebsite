@@ -219,12 +219,6 @@ function ServicesSection() {
       description: 'Streamline your hiring lifecycle. We help you design recruitment frameworks, source top tech talent, and build high-performing teams.'
     },
     {
-      id: 'ai-strategy',
-      icon: Brain,
-      title: 'AI Strategy & Consulting',
-      description: 'We audit your business processes, identify high-impact AI opportunities, and co-create a prioritized AI adoption and transformation roadmap.'
-    },
-    {
       id: 'custom-ai',
       icon: Cpu,
       title: 'Custom AI Solutions',

@@ -34,13 +34,13 @@ function App() {
             <Route path="/insights" element={<Insights />} />
             <Route path="/insights/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/careers-new" element={<CareersNew />} />
-            <Route path="/careers/apply" element={<ApplyJob />} />
-            <Route path="/careers/apply/:paperformId" element={<ApplyJob />} />
-            <Route path="/careers/intern" element={<ApplyIntern />} />
-            <Route path="/careers/intern/:paperformId" element={<ApplyIntern />} />
-            <Route path="/careers/:slug" element={<JobDetail />} />
+            <Route path="/jobs" element={<Careers />} />
+            <Route path="/jobs-new" element={<CareersNew />} />
+            <Route path="/apply" element={<ApplyJob />} />
+            <Route path="/apply/:paperformId" element={<ApplyJob />} />
+            <Route path="/intern" element={<ApplyIntern />} />
+            <Route path="/intern/:paperformId" element={<ApplyIntern />} />
+            <Route path="/:slug" element={<JobDetail />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             
             {/* Admin Routes */}

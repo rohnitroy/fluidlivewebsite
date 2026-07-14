@@ -137,7 +137,7 @@ export default function Chatbot() {
     const lowerMessage = message.toLowerCase()
     
     if (lowerMessage.includes('service') || lowerMessage.includes('what do you do')) {
-      return 'We offer 5 core AI services: AI Strategy & Consulting, AI-Powered Products, AI-Enhanced Creative, AI for Marketing & Sales, and Custom AI Solutions. Which area interests you most?'
+      return 'We offer 4 core AI services: AI-Powered Products, AI-Enhanced Creative, AI for Marketing & Sales, and Custom AI Solutions. Which area interests you most?'
     }
     
     if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('pricing')) {

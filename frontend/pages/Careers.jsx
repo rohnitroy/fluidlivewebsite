@@ -26,8 +26,8 @@ export default function Careers() {
   return (
     <div className="pt-4">
       <SEO
-        title="Careers"
-        path="/careers"
+        title="Jobs"
+        path="/jobs"
         description="Join FluidLive Solutions. We're looking for talented individuals passionate about AI, design, and technology to shape the future."
         keywords="FluidLive careers, AI jobs, tech jobs Pune, join FluidLive, fluid live jobs"
       />
@@ -35,7 +35,7 @@ export default function Careers() {
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section className="pt-10 md:pt-16 pb-4 md:pb-6 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="overline">CAREERS</span>
+          <span className="overline">JOBS</span>
           <h1 className="text-5xl md:text-6xl font-medium mt-6 mb-8" style={{ letterSpacing: '-0.02em' }}>
             Join <span className="gradient-text">Fluid.Live</span>
           </h1>
@@ -99,24 +99,47 @@ export default function Careers() {
 
           {/* Empty state */}
           {!loading && !error && filtered.length === 0 && (
-            <div className="text-center py-24">
+            <div className="text-center py-24 flex flex-col items-center justify-center">
               <div className="text-6xl mb-6">🌊</div>
               <h3 className="text-2xl font-medium text-gray-800 mb-3">No openings right now</h3>
-              <p className="text-gray-500 max-w-md mx-auto">
+              <p className="text-gray-500 max-w-md mx-auto mb-6">
                 We're always looking for great talent. Send your profile to{' '}
                 <a href="mailto:hrteam@fluid.live" className="text-blue-600 hover:underline">
                   hrteam@fluid.live
                 </a>
               </p>
+              {filter.toLowerCase() === 'internship' && (
+                <Link
+                  to="/intern"
+                  className="px-8 py-3 text-white font-medium rounded-full transition-all duration-300 bg-blue-600 hover:bg-blue-700 text-base inline-block"
+                >
+                  Apply For Any Internship Not Listed Here
+                </Link>
+              )}
             </div>
           )}
 
           {/* Job cards grid */}
           {!loading && !error && filtered.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {filtered.map(job => (
-                <JobCard key={job.id} job={job} />
-              ))}
+            <div className="space-y-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {filtered.map(job => (
+                  <JobCard key={job.id} job={job} />
+                ))}
+              </div>
+              
+              {filter.toLowerCase() === 'internship' && (
+                <div className="text-center mt-12 bg-white rounded-2xl p-8 border border-gray-200 shadow-sm max-w-2xl mx-auto">
+                  <h3 className="text-xl font-medium text-gray-900 mb-3">Looking for a different internship?</h3>
+                  <p className="text-gray-500 mb-6">If you don't see the specific internship you are looking for, you can still apply and tell us about your skills.</p>
+                  <Link
+                    to="/intern"
+                    className="px-8 py-3 text-white font-medium rounded-full transition-all duration-300 bg-blue-600 hover:bg-blue-700 text-base inline-block"
+                  >
+                    Apply For Any Internship Not Listed Here
+                  </Link>
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -178,7 +201,7 @@ export default function Careers() {
             We're always open to connecting with great people. Drop us your profile and we'll reach out when something clicks.
           </p>
           <Link
-            to="/careers/apply"
+            to="/apply"
             className="px-8 py-4 text-blue-600 font-medium rounded-full transition-all duration-300 bg-white hover:bg-gray-100 text-lg inline-block"
           >
             Apply For Any Job Not Listed Here
@@ -191,7 +214,7 @@ export default function Careers() {
 
 /* ─────────────────────── Job Card Component ────────────────────────── */
 function JobCard({ job }) {
-  const slug = titleToSlug(job.title)
+  const slug = job.slug || titleToSlug(job.title)
   const salary = formatSalary(job.minSalary || job.min_salary, job.maxSalary || job.max_salary, job.showSalaryToCandidate ?? job.show_salary_to_candidate)
   const experience = formatExperience(job.minExperience || job.min_experience, job.maxExperience || job.max_experience)
   const posted = formatPostedDate(job.postedDate || job.created_at)
@@ -203,7 +226,7 @@ function JobCard({ job }) {
 
   return (
     <Link
-      to={`/careers/${slug}`}
+      to={`/${slug}`}
       state={{ job }}
       className="group block card card-hover p-0 overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
     >

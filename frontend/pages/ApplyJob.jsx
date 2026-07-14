@@ -16,7 +16,7 @@ export default function ApplyJob() {
     <div className="min-h-screen bg-white flex flex-col items-center">
       <SEO
         title={`Apply - ${jobTitle}`}
-        path={paperformId ? `/careers/apply/${paperformId}` : '/careers/apply'}
+        path={paperformId ? `/apply/${paperformId}` : '/apply'}
         description={`Application form for ${jobTitle} at FluidLive.`}
       />
       
@@ -40,7 +40,7 @@ export default function ApplyJob() {
       
       {/* Section 2: Form/IFrame Area */}
       <div className="w-full max-w-4xl px-4 sm:px-6 py-12">
-        <Link to="/careers" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors mb-6 group">
+        <Link to="/jobs" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors mb-6 group">
           <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
           Back to Openings
         </Link>

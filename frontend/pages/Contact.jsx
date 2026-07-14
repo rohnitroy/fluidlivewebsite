@@ -8,7 +8,7 @@ export default function Contact() {
     name: '',
     email: '',
     company: '',
-    countryCode: '+1',
+    countryCode: '+91',
     phone: '',
     message: ''
   })
@@ -53,7 +53,7 @@ export default function Contact() {
 
       if (response.ok) {
         setStatus({ type: 'success', message: data.message || 'Message sent successfully!' })
-        setFormData({ name: '', email: '', company: '', countryCode: '+1', phone: '', message: '' })
+        setFormData({ name: '', email: '', company: '', countryCode: '+91', phone: '', message: '' })
         startCooldown()
       } else {
         setStatus({ type: 'error', message: data.error || 'Something went wrong. Please try again.' })
@@ -293,8 +293,8 @@ export default function Contact() {
                     </svg>
                     <div>
                       <p className="font-medium text-gray-900">Email</p>
-                      <a href="mailto:hrteam@fluid.live" className="transition-colors duration-300" style={{color: '#4F8CFF'}}>
-                        hrteam@fluid.live
+                      <a href="mailto:sales@fluid.live" className="transition-colors duration-300" style={{color: '#4F8CFF'}}>
+                        sales@fluid.live
                       </a>
                     </div>
                   </div>
@@ -387,7 +387,7 @@ export default function Contact() {
                 allowFullScreen=""
                 referrerPolicy="no-referrer-when-downgrade"
                 title="FluidLive Solutions office location on Google Maps"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.2606050000003!2d73.88590!3d18.52040!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c07cedc1e4fb%3A0x8f8f8f8f8f8f8f8f!2sKoregaon%20Park%20Annexe%2C%20Pune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1715000000000"
+                src="https://maps.google.com/maps?cid=5649741900640322487&output=embed"
               />
             </div>
           </div>

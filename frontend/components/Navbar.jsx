@@ -92,11 +92,11 @@ export default function Navbar() {
                   ? 'text-white drop-shadow-md hover:text-gray-100'
                   : 'text-gray-600 hover:text-gray-900'
               }`}>About</Link>
-              <Link to="/careers" className={`font-medium transition-colors duration-300 ${
+              <Link to="/jobs" className={`font-medium transition-colors duration-300 ${
                 isHomePage && !isScrolled
                   ? 'text-white drop-shadow-md hover:text-gray-100'
                   : 'text-gray-600 hover:text-gray-900'
-              }`}>Careers</Link>
+              }`}>Jobs</Link>
               <Link 
                 to="/contact" 
                 className={`btn-primary transition-all duration-300 ${
@@ -162,12 +162,12 @@ export default function Navbar() {
               About
             </Link>
             <Link 
-              to="/careers" 
+              to="/jobs" 
               onClick={() => setIsOpen(false)} 
               className="text-2xl font-medium text-gray-900 hover:text-blue-600 transition-colors duration-200 py-4 border-b border-gray-100"
               style={{letterSpacing: '-0.01em'}}
             >
-              Careers
+              Jobs
             </Link>
           </nav>
           

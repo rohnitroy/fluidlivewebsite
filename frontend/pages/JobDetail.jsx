@@ -38,7 +38,7 @@ export default function JobDetail() {
         <div className="text-6xl mb-2">🌊</div>
         <h1 className="text-3xl font-medium text-gray-900">Job Not Found</h1>
         <p className="text-gray-500 max-w-md">This opening may no longer be available or the link might be outdated.</p>
-        <Link to="/careers" className="btn-primary mt-4 text-base">← View All Openings</Link>
+        <Link to="/jobs" className="btn-primary mt-4 text-base">← View All Openings</Link>
       </div>
     )
   }
@@ -58,7 +58,7 @@ export default function JobDetail() {
     <div className="pt-4 min-h-screen bg-white">
       <SEO
         title={job.title}
-        path={`/careers/${slug}`}
+        path={`/${slug}`}
         description={`${job.title} at ${company} - ${location_}. ${type ? type + ' · ' : ''}${exp ? exp + ' experience required.' : ''}`}
         keywords={`${job.title}, ${company}, ${location_}, jobs, careers, fluid live`}
       />
@@ -73,7 +73,7 @@ export default function JobDetail() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
         {/* Breadcrumb */}
-        <Link to="/careers" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors mb-8 group">
+        <Link to="/jobs" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors mb-8 group">
           <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
           Back to Openings
         </Link>
