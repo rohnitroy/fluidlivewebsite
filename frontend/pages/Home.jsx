@@ -326,11 +326,11 @@ function StatsSection() {
   const testimonials = [
     {
       quote: "Fluid.Live didn't just deliver a product - they became a true partner in our AI transformation.",
-      author: "CEO, FINTECH SCALE-UP"
+      author: "CEO, OMNICHANNEL TECH COMPANY"
     },
     {
       quote: "The blend of creative thinking and technical depth is unlike any agency we've worked with.",
-      author: "CMO, OMNICHANNEL TECH COMPANY"
+      author: "CMO, FINTECH SCALE-UP"
     },
     {
       quote: "From strategy to execution, the team was with us every step. Truly fluid collaboration.",
