@@ -104,7 +104,7 @@ export const staticJobs = [
     "ctc": "₹4.5L - ₹5.5L",
     "industry": "Quality Assurance (QA)",
     "location": "Viman Nagar, Pune",
-    "description": "<b>Qualifications</b>\n<ul><li>2-4 years’ Software Testing Experience</li><li>Minimum 2 years experience in Insurance Domain (India)</li><li>Good communication skills are a must</li></ul><div><br></div><div><b>Education: </b>Bachelor’s Degree, computer science or related field</div>",
+    "description": "<b>Primary Responsibilities</b><ul><li>Design, write, and execute comprehensive test plans and test cases for core insurance modules.</li><li>Perform functional, regression, integration, and end-to-end testing of policy administration and claims systems.</li><li>Identify, document, track, and verify software defects to ensure high-quality application delivery.</li><li>Collaborate closely with developers, business analysts, and product owners to clarify system requirements and workflows.</li><li>Analyze test results, generate quality reports, and communicate progress to stakeholders.</li></ul><div><br></div><b>Qualifications</b><ul><li>2-4 years’ Software Testing Experience</li><li>Minimum 2 years experience in Insurance Domain (India)</li><li>Good communication skills are a must</li></ul><div><br></div><b>Education: </b>Bachelor’s Degree, computer science or related field",
     "skills": [
       "Developing Test scenarios",
       "Execution of test cases",
