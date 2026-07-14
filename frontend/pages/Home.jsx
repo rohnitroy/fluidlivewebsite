@@ -330,11 +330,11 @@ function StatsSection() {
     },
     {
       quote: "The blend of creative thinking and technical depth is unlike any agency we've worked with.",
-      author: "CMO, TELECOM EXPENSE MANAGEMENT PLATFORM"
+      author: "CMO, EDTECH PLATFORM"
     },
     {
       quote: "From strategy to execution, the team was with us every step. Truly fluid collaboration.",
-      author: "CTO, EDTECH PLATFORM"
+      author: "CTO, TELECOM EXPENSE MANAGEMENT PLATFORM"
     }
   ]
 
