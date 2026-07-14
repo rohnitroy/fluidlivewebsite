@@ -330,7 +330,7 @@ function StatsSection() {
     },
     {
       quote: "The blend of creative thinking and technical depth is unlike any agency we've worked with.",
-      author: "CMO, GLOBAL MEDIA GROUP"
+      author: "CMO, TELECOM EXPENSE MANAGEMENT PLATFORM"
     },
     {
       quote: "From strategy to execution, the team was with us every step. Truly fluid collaboration.",
